@@ -7,7 +7,7 @@ import { Container, Typography, Box, Button, Link } from "@mui/material";
 // import Link from "next/link";
 import alby from "../assets/images/alby.png";
 import createAlby from "../assets/images/createAlby.png";
-import twitterAlby from "../assets/images/twitterAlby.png";
+import { fetchInvoice } from "../components/Payments/fetchInvoice";
 
 function Webln() {
   const [nodeInfo, setNodeInfo] = useState(null);
@@ -30,10 +30,11 @@ function Webln() {
 
   async function receivePayment() {
     const payInvoice = async (invoice) => {
-      const apiKey = "9af358a4eec34c9aafbe77d8b33d564d";
-      var invoice = invoice.paymentRequest;
+      const apiKey = "143ada40429f4b42aec4780672f31f6a";
+      var invoice = invoice.paymentRequest.toString();
       const body = `{"out": true, "bolt11": ${invoice}}`;
       console.log(invoice);
+      console.log(body);
 
       const res = await fetch(
         "https://aloofmeerkat2.lnbits.com/api/v1/payments",
@@ -59,25 +60,6 @@ function Webln() {
   }
 
   async function makePayment() {
-    const fetchInvoice = async () => {
-      const apiKey = "9af358a4eec34c9aafbe77d8b33d564d";
-      const body = `{"out": false, "amount": 5, "memo": "Lightning rocks", "unit": "sat", "webhook": "", "internal": false}`;
-
-      const res = await fetch(
-        "https://aloofmeerkat2.lnbits.com/api/v1/payments",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-Api-Key": apiKey,
-          },
-          body: body,
-        }
-      );
-      const data = await res.json();
-      //setInvoice(data.payment_request);
-      return data;
-    };
     const invoice = await fetchInvoice();
     console.log(invoice);
     await webln.sendPayment(invoice.payment_request);
@@ -210,24 +192,6 @@ function Webln() {
         >
           Betala 5 sats
         </Button>
-        <Typography variant="h5" sx={{ mt: 3 }}>
-          Bra jobbat!
-        </Typography>
-        <Typography sx={{mb: 2}}>
-          Nu har du kommit igång med Lightning på webben! Håll utkik efter
-          färgen på Alby ikonen uppe till höger i webbläsaren. Den kommer lysa
-          blått om hemsidan du besöker har aktiverat WebLN protokollet eller om
-          den hittar en lightning adress på hemsidan som du kan skicka sats
-          till. Testa till exempel att gå in på vår twitter profil där vi har
-          skrivit in vår lightning adress. Alby ikonen kommer bli blå och då kan
-          du trycka på den för att blixtsnabbt och billigt skicka en betalning
-          till oss utan inblandning av en bank. Ganska coolt!
-        </Typography>
-        <img
-          src={twitterAlby.src}
-          alt="Pay on Twitter"
-          style={{ maxWidth: 750 }}
-        />
       </Box>
     </Container>
   );

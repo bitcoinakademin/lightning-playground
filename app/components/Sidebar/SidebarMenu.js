@@ -16,11 +16,9 @@ import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import HomeIcon from "@mui/icons-material/Home";
 import InstallDesktopIcon from "@mui/icons-material/InstallDesktop";
 import UndoIcon from "@mui/icons-material/Undo";
-
-import DisplaySettingsTwoToneIcon from "@mui/icons-material/DisplaySettingsTwoTone";
+import { BitcoinIcon, HomeIcon, GlobeIcon, LightningCircleIcon, CaretLeftIcon, Confirmations6Icon } from '@bitcoin-design/bitcoin-icons-react/filled';
 
 function SidebarMenu() {
   const theme = useTheme();
@@ -43,17 +41,18 @@ function SidebarMenu() {
           height: "100vh",
         }}
       >
+        <LightningCircleIcon style={{width: "100", color: '#fcba03', marginLeft: "10"}}/>
         <List>
           <ListItem>
             <Button
-              startIcon={<HomeIcon />}
+              startIcon={<HomeIcon style={{width: "25" }} />}
               onClick={() => router.push("/")}
               sx={{
                 color: pathname === "/" ? "primary" : "black",
                 textTransform: "none",
               }}
             >
-              Hem
+              Start
             </Button>
           </ListItem>
         </List>
@@ -75,7 +74,7 @@ function SidebarMenu() {
             <List component="div">
               <ListItem component="div">
                 <Button
-                  startIcon={<InstallDesktopIcon />}
+                  startIcon={<GlobeIcon style={{width: "25" }} />}
                   onClick={() => router.push("/webln")}
                   sx={{
                     color: pathname === "/webln" ? "primary" : "black",
@@ -83,6 +82,18 @@ function SidebarMenu() {
                   }}
                 >
                   Kom igång
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  startIcon={<Confirmations6Icon style={{width: "25" }} />}
+                  onClick={() => router.push("/webln/use")}
+                  sx={{
+                    color: pathname === "/webln/use" ? "primary" : "black",
+                    textTransform: "none",
+                  }}
+                >
+                  Användning
                 </Button>
               </ListItem>
             </List>
@@ -102,21 +113,18 @@ function SidebarMenu() {
             </Typography>
           }
         >
-          <Box >
+          <Box>
             <List>
               <ListItem>
-                <Link
-                  component={NextLink}
-                  href="https://bitcoinakademin.se/"
-                >
+                <Link component={NextLink} href="https://bitcoinakademin.se/">
                   <Button
-                    startIcon={<UndoIcon />}
+                    startIcon={<CaretLeftIcon style={{width: "25" }} />}
                     sx={{
                       color: "black",
                       textTransform: "none",
                     }}
                   >
-                    Tillbaka till startsidan
+                    Tillbaka till BA
                   </Button>
                 </Link>
               </ListItem>
