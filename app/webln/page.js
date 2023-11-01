@@ -2,17 +2,18 @@
 
 import { requestProvider } from "webln";
 import { useState } from "react";
-import { Container, Typography, Box, Button, Link } from "@mui/material";
-
+import { Container, Typography, Box, Button, Link, Stack } from "@mui/material";
+import { useRouter } from "next/navigation";
 // import Link from "next/link";
 import alby from "../assets/images/alby.png";
 import createAlby from "../assets/images/createAlby.png";
 import { fetchInvoice } from "../components/Payments/fetchInvoice";
 
-function Webln() {
+export default function Webln() {
   const [nodeInfo, setNodeInfo] = useState(null);
   const [balance, setBalance] = useState(0);
   const [webln, setWebln] = useState(null);
+  const router = useRouter();
 
   const albyLink = <Link href="https://getalby.com/">Alby</Link>;
 
@@ -76,12 +77,12 @@ function Webln() {
         mb: "100px",
       }}
     >
-      <Box sx={{ maxWidth: "750px" }}>
+      <Box sx={{ maxWidth: "md" }}>
         <Typography variant="h4">Webbplånbok</Typography>
         <Typography>
-          Med en webbplånbok kan du enkelt betala med bitcoin på hemsidor genom
-          Lightning Network. Här visar vi hur du kommer igång med att använda en
-          webbplånbok, steg för steg. Häng med!
+          Med en webbplånbok kan du enkelt betala med bitcoin genom lightning
+          network på hemsidor. Här visar vi hur du kommer igång med att använda
+          en webbplånbok, steg för steg. Häng med!
         </Typography>
 
         <Typography variant="h5" sx={{ mt: 3 }}>
@@ -192,9 +193,38 @@ function Webln() {
         >
           Betala 5 sats
         </Button>
+        <Stack
+          width="100%"
+          display="flex"
+          direction="row"
+          justifyContent="space-between"
+          sx={{ mt: 5 }}
+        >
+          <Button
+            variant="outlined"
+            sx={{
+              fontWeight: "bold",
+              mt: 2,
+              textTransform: "none",
+            }}
+            onClick={() => router.push("/")}
+          >
+            Tillbaka
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              mt: 2,
+              textTransform: "none",
+            }}
+            onClick={() => router.push("/webln/use")}
+          >
+            Gå vidare
+          </Button>
+        </Stack>
       </Box>
     </Container>
   );
 }
-
-export default Webln;

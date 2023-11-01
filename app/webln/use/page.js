@@ -1,7 +1,8 @@
 "use client";
 
-import { Container, Typography, Box, Link, TextField } from "@mui/material";
+import { Container, Typography, Box, Link, TextField, Stack, Button } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { fetchInvoice } from "@/app/components/Payments/fetchInvoice";
 import twitterAlby from "../../assets/images/twitterAlby.png";
 import sendAlby from "../../assets/images/sendAlby.png";
@@ -9,6 +10,7 @@ import sendAlby from "../../assets/images/sendAlby.png";
 export default function Use() {
   const [paymentRequest, setPaymentRequest] = useState("hämtar betalningsbegäran...");
   const twitterLink = <Link href="https://twitter.com/BAkademin">twitter</Link>;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +29,10 @@ export default function Use() {
         alignItems: "start",
         mt: "125px",
         minHeight: "100vh",
-        mb: 10,
+        mb: "100px",
       }}
     >
-      <Box sx={{ maxWidth: "750px" }}>
+      <Box sx={{  maxWidth: "md" }}>
         <Typography variant="h4">Använd Webbplånbok</Typography>
         <Typography sx={{ mb: 2 }}>
           Nu har du kommit igång med Lightning på webben! I förra delen lärde du
@@ -78,6 +80,37 @@ export default function Use() {
           alt="Pay with Alby"
           style={{ maxWidth: 750 }}
         />
+        <Stack
+          width="100%"
+          display="flex"
+          direction="row"
+          justifyContent="space-between"
+          sx={{ mt: 5 }}
+        >
+          <Button
+            variant="outlined"
+            sx={{
+              fontWeight: "bold",
+              mt: 2,
+              textTransform: "none",
+            }}
+            onClick={() => router.push("/webln")}
+          >
+            Tillbaka
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              mt: 2,
+              textTransform: "none",
+            }}
+            onClick={() => router.push("/mobile")}
+          >
+            Gå vidare
+          </Button>
+        </Stack>
       </Box>
     </Container>
   );

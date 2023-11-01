@@ -1,11 +1,8 @@
 "use client";
 
 import {
-  ListSubheader,
-  alpha,
   Box,
   List,
-  styled,
   Button,
   ListItem,
   useTheme,
@@ -16,9 +13,14 @@ import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import InstallDesktopIcon from "@mui/icons-material/InstallDesktop";
-import UndoIcon from "@mui/icons-material/Undo";
-import { BitcoinIcon, HomeIcon, GlobeIcon, LightningCircleIcon, CaretLeftIcon, Confirmations6Icon } from '@bitcoin-design/bitcoin-icons-react/filled';
+import {
+  HomeIcon,
+  GlobeIcon,
+  LightningCircleIcon,
+  DevicesIcon,
+  Confirmations6Icon,
+  NodeIcon
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 
 function SidebarMenu() {
   const theme = useTheme();
@@ -32,7 +34,7 @@ function SidebarMenu() {
         left: 0,
         top: "60px",
         bgcolor: colors.grey[50],
-        width: "250px",
+        width: "225px",
       }}
     >
       <Box
@@ -41,21 +43,17 @@ function SidebarMenu() {
           height: "100vh",
         }}
       >
-        <LightningCircleIcon style={{width: "100", color: '#fcba03', marginLeft: "10"}}/>
-        <List>
-          <ListItem>
-            <Button
-              startIcon={<HomeIcon style={{width: "25" }} />}
-              onClick={() => router.push("/")}
-              sx={{
-                color: pathname === "/" ? "primary" : "black",
-                textTransform: "none",
-              }}
-            >
-              Start
-            </Button>
-          </ListItem>
-        </List>
+        <Link
+          component={NextLink}
+          href="/"
+          variant="inherit"
+          underline="none"
+          color="white"
+        >
+          <LightningCircleIcon
+            style={{ width: "100", color: "#fcba03", marginLeft: "10" }}
+          />
+        </Link>
         <List
           subheader={
             <Typography
@@ -74,7 +72,7 @@ function SidebarMenu() {
             <List component="div">
               <ListItem component="div">
                 <Button
-                  startIcon={<GlobeIcon style={{width: "25" }} />}
+                  startIcon={<GlobeIcon style={{ width: "25" }} />}
                   onClick={() => router.push("/webln")}
                   sx={{
                     color: pathname === "/webln" ? "primary" : "black",
@@ -86,10 +84,96 @@ function SidebarMenu() {
               </ListItem>
               <ListItem component="div">
                 <Button
-                  startIcon={<Confirmations6Icon style={{width: "25" }} />}
+                  startIcon={<Confirmations6Icon style={{ width: "25" }} />}
                   onClick={() => router.push("/webln/use")}
                   sx={{
                     color: pathname === "/webln/use" ? "primary" : "black",
+                    textTransform: "none",
+                  }}
+                >
+                  Användning
+                </Button>
+              </ListItem>
+            </List>
+          </Box>
+        </List>
+        <List
+          subheader={
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: theme.spacing(0, 2.5),
+                lineHeight: 1.4,
+              }}
+            >
+              Mobilplånbok
+            </Typography>
+          }
+        >
+          <Box>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                  startIcon={<DevicesIcon style={{ width: "25" }} />}
+                  onClick={() => router.push("/mobile")}
+                  sx={{
+                    color: pathname === "/mobile" ? "primary" : "black",
+                    textTransform: "none",
+                  }}
+                >
+                  Kom igång
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  startIcon={<Confirmations6Icon style={{ width: "25" }} />}
+                  onClick={() => router.push("/mobile/use")}
+                  sx={{
+                    color: pathname === "/mobile/use" ? "primary" : "black",
+                    textTransform: "none",
+                  }}
+                >
+                  Användning
+                </Button>
+              </ListItem>
+            </List>
+          </Box>
+        </List>
+        <List
+          subheader={
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: theme.spacing(0, 2.5),
+                lineHeight: 1.4,
+              }}
+            >
+              Lightning-nod
+            </Typography>
+          }
+        >
+          <Box>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                  startIcon={<NodeIcon style={{ width: "25" }} />}
+                  onClick={() => router.push("/node")}
+                  sx={{
+                    color: pathname === "/node" ? "primary" : "black",
+                    textTransform: "none",
+                  }}
+                >
+                  Kom igång
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  startIcon={<Confirmations6Icon style={{ width: "25" }} />}
+                  onClick={() => router.push("/node/use")}
+                  sx={{
+                    color: pathname === "/node/use" ? "primary" : "black",
                     textTransform: "none",
                   }}
                 >
@@ -118,13 +202,13 @@ function SidebarMenu() {
               <ListItem>
                 <Link component={NextLink} href="https://bitcoinakademin.se/">
                   <Button
-                    startIcon={<CaretLeftIcon style={{width: "25" }} />}
+                    startIcon={<HomeIcon style={{ width: "25" }} />}
                     sx={{
                       color: "black",
                       textTransform: "none",
                     }}
                   >
-                    Tillbaka till BA
+                    Hem till BA
                   </Button>
                 </Link>
               </ListItem>
