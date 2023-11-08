@@ -3,21 +3,27 @@ import { Grid, Link, AppBar, Toolbar, Typography } from "@mui/material";
 const Footer = () => {
   return (
     <AppBar
-      position="sticky"
-      //color="transparent"
+      sx={{
+        position: "relative",
+        bottom: 0,
+        zIndex: 100,
+        width: "100%",
+        height: "70px",
+      }}
     >
       <Toolbar>
         <Grid
           container
           display="flex"
-          justifyContent="space-around"
           alignItems="center"
-          direction="column"
         >
           <Grid
             item
-            xs={12}
-            md={12}
+            md={1}
+          ></Grid>
+          <Grid
+            item
+            md={11}
             display="flex"
             direction="column"
             justifyContent="center"
@@ -25,14 +31,11 @@ const Footer = () => {
           >
             <Link
               href="https://bitcoinakademin.se/"
-              sx={{color: "white", mb: 0, mt: 2}}
+              sx={{ color: "white", mt: 2 }}
             >
               BitcoinAkademin
             </Link>
-            <Typography
-              variant="caption"
-              sx={{color: "white", mb: 1 }}
-            >
+            <Typography variant="caption" sx={{ color: "white", mb: 1 }}>
               @2023
             </Typography>
           </Grid>

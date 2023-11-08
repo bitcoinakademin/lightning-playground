@@ -16,10 +16,9 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   HomeIcon,
   GlobeIcon,
-  LightningCircleIcon,
   DevicesIcon,
   Confirmations6Icon,
-  NodeIcon
+  NodeIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 function SidebarMenu() {
@@ -30,30 +29,16 @@ function SidebarMenu() {
   return (
     <Box
       sx={{
-        position: "fixed",
-        left: 0,
-        top: "60px",
+        position: "-webkit-sticky", /* Safari */
+        position: "sticky",
+        top: "60px", 
+        flex: "0 0 225px",
+        height: "calc(100vh - 60px)",
+        overflowY: "auto" ,
         bgcolor: colors.grey[50],
-        width: "225px",
+        padding: theme.spacing(1),
       }}
     >
-      <Box
-        sx={{
-          padding: theme.spacing(1),
-          height: "100vh",
-        }}
-      >
-        <Link
-          component={NextLink}
-          href="/"
-          variant="inherit"
-          underline="none"
-          color="white"
-        >
-          <LightningCircleIcon
-            style={{ width: "100", color: "#fcba03", marginLeft: "10" }}
-          />
-        </Link>
         <List
           subheader={
             <Typography
@@ -62,6 +47,7 @@ function SidebarMenu() {
                 fontSize: 14,
                 padding: theme.spacing(0, 2.5),
                 lineHeight: 1.4,
+                mt: 2,
               }}
             >
               Webbplånbok
@@ -208,14 +194,13 @@ function SidebarMenu() {
                       textTransform: "none",
                     }}
                   >
-                    Hem till BA
+                    Tillbaka till BA
                   </Button>
                 </Link>
               </ListItem>
             </List>
           </Box>
         </List>
-      </Box>
     </Box>
   );
 }

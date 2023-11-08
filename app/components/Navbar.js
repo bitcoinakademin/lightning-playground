@@ -7,17 +7,25 @@ import {
   useMediaQuery,
   useTheme,
   Typography,
+  Stack,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
+import { LightningCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <AppBar 
-    elevation={5}
-    sx={{height: 60, position:"fixed"}}>
+    <AppBar
+      sx={{
+        position:"fixed",
+        top: 0,
+        zIndex: 100,
+        width: "100%",
+        height: "60px",
+      }}
+    >
       <Toolbar>
         {isMobile ? (
           <Grid
@@ -69,26 +77,46 @@ const Navbar = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            sx={{ pt: 3, pb: 3 }}
           >
             <Grid
               item
-              md={12}
+              md={1}
+              display="flex"
+              justifyContent="start"
+              alignItems="center"
+            >
+              <Link
+                component={NextLink}
+                href="/"
+                variant="inherit"
+                underline="none"
+                color="white"
+              >
+                <LightningCircleIcon
+                  style={{ width: "50", color: "white" }}
+                />
+              </Link>
+            </Grid>
+            <Grid
+              item
+              md={11}
               display="flex"
               justifyContent="center"
               alignItems="center"
             >
-              <Typography variant="h5" fontWeight="bold">
-                <Link
-                  component={NextLink}
-                  href="/"
-                  variant="inherit"
-                  underline="none"
-                  color="white"
-                >
-                  Lightning Playground
-                </Link>
-              </Typography>
+              <Link
+                component={NextLink}
+                href="/"
+                variant="inherit"
+                underline="none"
+                color="white"
+              >
+
+                  <Typography variant="h5" fontWeight="bold">
+                    Lightning Playground
+                  </Typography>
+             
+              </Link>
             </Grid>
           </Grid>
         )}
