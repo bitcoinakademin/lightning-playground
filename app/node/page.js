@@ -1,15 +1,14 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 
 export default function Node() {
   return (
-      <Box
-        sx={{
-          maxWidth: "md",
-          width: "100vw",
-        }}
-      >
+    <Grid container spacing={2} sx={{ maxWidth: "md", width: "100%" }}>
+      <Grid item xs={12} md={12}>
         <Typography variant="h4">Lightning-nod</Typography>
-        <Typography>Här visar vi hur man kommer igång med en egen lightning-nod.</Typography>
-      </Box>
+        <Typography>
+          Här visar vi hur man kommer igång med en egen lightning-nod.
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }

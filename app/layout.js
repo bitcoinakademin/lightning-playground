@@ -30,9 +30,11 @@ export default function RootLayout({ children }) {
               sx={{
                 flex: "1" /* Takes up the remaining width */,
                 overflowY: "auto",
-                marginY: 7,
+                marginY: 5,
+                marginX: 2,
                 display: "flex",
                 justifyContent: "center",
+                minHeight: "70vh",
               }}
             >
               {children}

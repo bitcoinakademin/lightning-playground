@@ -7,11 +7,11 @@ import {
   useMediaQuery,
   useTheme,
   Typography,
-  Stack,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
 import { LightningCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import MyDrawer from "./Sidebar/MyDrawer";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <AppBar
       sx={{
-        position:"fixed",
+        position: "fixed",
         top: 0,
         zIndex: 100,
         width: "100%",
@@ -42,7 +42,7 @@ const Navbar = () => {
               justifyContent="center"
               alignItems="center"
             >
-              {/* <CustomDrawer /> */}
+              <MyDrawer />
             </Grid>
             <Grid
               item
@@ -51,7 +51,7 @@ const Navbar = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Typography variant="h5">
+              <Typography variant="h6">
                 <Link
                   component={NextLink}
                   href="/"
@@ -92,9 +92,7 @@ const Navbar = () => {
                 underline="none"
                 color="white"
               >
-                <LightningCircleIcon
-                  style={{ width: "50", color: "white" }}
-                />
+                <LightningCircleIcon style={{ width: "50", color: "white" }} />
               </Link>
             </Grid>
             <Grid
@@ -111,11 +109,9 @@ const Navbar = () => {
                 underline="none"
                 color="white"
               >
-
-                  <Typography variant="h5" fontWeight="bold">
-                    Lightning Playground
-                  </Typography>
-             
+                <Typography variant="h5" fontWeight="bold">
+                  Lightning Playground
+                </Typography>
               </Link>
             </Grid>
           </Grid>

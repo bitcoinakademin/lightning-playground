@@ -1,5 +1,11 @@
 "use client";
-import { Container, Typography, Box, Button, Stack } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Grid,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 import {
   DevicesIcon,
@@ -9,17 +15,16 @@ import {
 
 export default function Home() {
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        flexDirection: "column",
-        height: "50vh",
-        maxWidth: "md",
-      }}
+    <Grid
+      container
+      spacing={2}
+      sx={{ height: isMobile ? "100%" : "50vh", maxWidth: "md" }}
     >
-      <Stack>
+      <Grid item xs={12} md={12}>
         <Typography variant="h4">Välkommen!</Typography>
         <Typography>
           Välkommen till Bitcoin Akademins playground för Lightning Network! Här
@@ -29,8 +34,8 @@ export default function Home() {
           den delen du vill börja med nedan. Om du är helt ny till lightning
           rekommenderar vi att börja med en webbplånbok.
         </Typography>
-      </Stack>
-      <Stack spacing={2} direction="row">
+      </Grid>
+      <Grid item xs={12} md={4}>
         <Button
           endIcon={<GlobeIcon style={{ width: "150" }} />}
           onClick={() => router.push("/webln")}
@@ -38,10 +43,14 @@ export default function Home() {
           sx={{
             textTransform: "none",
             color: "white",
+            fontWeight: "bold",
+            minWidth: isMobile ? "100%" : "50px",
           }}
         >
           Webbplånbok
         </Button>
+      </Grid>
+      <Grid item xs={12} md={4}>
         <Button
           endIcon={<DevicesIcon style={{ width: "150" }} />}
           onClick={() => router.push("/webln")}
@@ -49,10 +58,14 @@ export default function Home() {
           sx={{
             textTransform: "none",
             color: "white",
+            fontWeight: "bold",
+            minWidth: isMobile ? "100%" : "50px",
           }}
         >
           Mobilplånbok
         </Button>
+      </Grid>
+      <Grid item xs={12} md={4}>
         <Button
           endIcon={<NodeIcon style={{ width: "150" }} />}
           onClick={() => router.push("/webln")}
@@ -60,12 +73,13 @@ export default function Home() {
           sx={{
             textTransform: "none",
             color: "white",
+            fontWeight: "bold",
+            minWidth: isMobile ? "100%" : "50px",
           }}
         >
           Lightning-nod
         </Button>
-      </Stack>
-    </Box>
-    // </Container>
+      </Grid>
+    </Grid>
   );
 }
