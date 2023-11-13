@@ -22,7 +22,7 @@ function SidebarMenu() {
             position: "-webkit-sticky" /* Safari */,
             position: "sticky",
             top: "60px",
-            flex: "0 0 225px",
+            flex: "0 0 250px",
             height: "calc(100vh - 60px)",
             overflowY: "auto",
             bgcolor: colors.grey[50],

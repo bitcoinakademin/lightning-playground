@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Drawer, IconButton, colors } from "@mui/material";
 import MenuItems from "./MenuItems";
 import {
-  LightningCircleIcon,
+  BitcoinCircleIcon,
   MenuIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Link from "@mui/material/Link";
@@ -18,7 +18,7 @@ function MyDrawer() {
         onClose={() => setOpenDrawer(false)}
         PaperProps={{
           sx: {
-            width: "50vw",
+            width: "70vw",
             display: "flex",
             flexDirection: "column",
             bgcolor: colors.grey[50],
@@ -32,7 +32,7 @@ function MyDrawer() {
           underline="none"
           color="white"
         >
-          <LightningCircleIcon
+          <BitcoinCircleIcon
             style={{
               width: "75",
               color: "#fcba03",

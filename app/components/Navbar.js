@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
-import { LightningCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { LightningCircleIcon, BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import MyDrawer from "./Sidebar/MyDrawer";
 
 const Navbar = () => {
@@ -59,7 +59,7 @@ const Navbar = () => {
                   underline="none"
                   color="white"
                 >
-                  Lightning Playground
+                  BitcoinAkademin
                 </Link>
               </Typography>
             </Grid>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 underline="none"
                 color="white"
               >
-                <LightningCircleIcon style={{ width: "50", color: "white" }} />
+                <BitcoinCircleIcon style={{ width: "50", color: "white" }} />
               </Link>
             </Grid>
             <Grid
@@ -110,7 +110,7 @@ const Navbar = () => {
                 color="white"
               >
                 <Typography variant="h5" fontWeight="bold">
-                  Lightning Playground
+                 BitcoinAkademin
                 </Typography>
               </Link>
             </Grid>
