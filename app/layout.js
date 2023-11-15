@@ -16,31 +16,31 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeRegistry options={{ key: "mui" }}>
-          <Navbar />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              pt: "60px",
-            }}
-          >
-            <SidebarMenu />
+        <ThemeRegistry options={{ key: "mui" }}> 
+            <Navbar />
             <Box
               sx={{
-                flex: "1" /* Takes up the remaining width */,
-                overflowY: "auto",
-                marginY: 5,
-                marginX: 2,
                 display: "flex",
-                justifyContent: "center",
-                minHeight: "70vh",
+                flexDirection: "row",
+                pt: "60px",
               }}
             >
-              {children}
+              <SidebarMenu />
+              <Box
+                sx={{
+                  flex: "1" /* Takes up the remaining width */,
+                  overflowY: "auto",
+                  marginY: 5,
+                  marginX: 2,
+                  display: "flex",
+                  justifyContent: "center",
+                  minHeight: "70vh",
+                }}
+              >
+                {children}
+              </Box>
             </Box>
-          </Box>
-          <Footer />
+            <Footer />
         </ThemeRegistry>
       </body>
     </html>

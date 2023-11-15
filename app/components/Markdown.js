@@ -39,7 +39,7 @@ export default function Markdown(props) {
       img: {
         props: {
           width: "100%",
-          objectFit: "scale-down",
+          //objectFit: "scale-down",
         },
       },
       li: {

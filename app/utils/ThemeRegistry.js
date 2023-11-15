@@ -6,6 +6,9 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "./theme";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import 'dayjs/locale/sv';
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
@@ -52,8 +55,10 @@ export default function ThemeRegistry(props) {
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="sv">
         <CssBaseline />
         {children}
+        </LocalizationProvider>
       </ThemeProvider>
     </CacheProvider>
   );

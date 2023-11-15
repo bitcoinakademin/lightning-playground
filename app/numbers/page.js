@@ -11,10 +11,14 @@ import {
   FormControl,
   MenuItem,
   InputLabel,
+  Stack,
+  Button,
 } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 export default function Numbers() {
   const [post, setPost] = useState(null);
@@ -23,6 +27,10 @@ export default function Numbers() {
   const [data, setData] = useState([0]);
   const [dates, setDates] = useState([0]);
   const [loading, setLoading] = useState(true);
+  const [startDate, setStartDate] = useState(dayjs("2023-11-10"));
+  const [endDate, setEndDate] = useState(dayjs());
+  const [bitcoinData, setBitcoinData] = useState([[0,0], [0,0]]);
+  const [scaleType, setScaleType] = useState("linear");
   const theme = useTheme();
 
   useEffect(() => {
@@ -41,6 +49,8 @@ export default function Numbers() {
         });
     };
     getPost();
+    fetchBitcoinData();
+
     const dates1M = [
       new Date(2022, 9, 16),
       new Date(2022, 9, 18),
@@ -98,7 +108,36 @@ export default function Numbers() {
     }
   };
 
-  console.log(data);
+  const handleChangeScale = (event) => {
+    setScaleType(event.target.value);
+  };
+
+  const fetchBitcoinData = () => {
+    const startDateUnix = dayjs(startDate).unix();
+    const endDateUnix = dayjs(endDate).unix();
+    const getBitcoinData = () => {
+      Axios({
+        method: "GET",
+        url: `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=sek&from=${startDateUnix}&to=${endDateUnix}`,
+      })
+        .then((res) => {
+          const newDates = res.data.prices.map(function (x) {
+            return new Date(x[0]);
+          });
+          const newPrices = res.data.prices.map(function (x) {
+            return x[1];
+          });
+          setBitcoinData([newDates, newPrices]);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    };
+    getBitcoinData(startDateUnix, endDateUnix);
+  };
+
+  console.log(bitcoinData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: "md" }}>
@@ -139,6 +178,66 @@ export default function Numbers() {
               width={750}
               maxWidth="md"
               height={400}
+            />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              Test av bitcoin graf
+            </Typography>
+            <Stack direction="row" spacing={3}>
+              <DatePicker
+                label="Från"
+                value={startDate}
+                onChange={(newValue) => setStartDate(newValue)}
+              />
+              <DatePicker
+                label="Till"
+                value={endDate}
+                onChange={(newValue) => setEndDate(newValue)}
+              />
+              <Button
+                variant="contained"
+                sx={{
+                  color: "white",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                }}
+                onClick={fetchBitcoinData}
+              >
+                Uppdatera graf
+              </Button>
+            </Stack>
+            <FormControl sx={{ minWidth: 200, mt: 5 }}>
+              <InputLabel>Skala</InputLabel>
+              <Select value={scaleType} label="Skala" onChange={(event) => setScaleType(event.target.value)}>
+                <MenuItem value={"linear"}>Linjär</MenuItem>
+                <MenuItem value={"log"}>Log</MenuItem>
+              </Select>
+            </FormControl>
+            <LineChart
+              xAxis={[
+                {
+                  data: bitcoinData[0],
+                  scaleType: "time",
+                },
+              ]}
+              yAxis={[
+                {
+                  scaleType: scaleType,
+                }
+              ]}
+              series={[
+                {
+                  label: "Bitcoin pris (SEK)",
+                  data: bitcoinData[1],
+                  color: theme.palette.primary.main,
+                  showMark: false,
+                },
+              ]}
+              width={750}
+              maxWidth="md"
+              height={400}
+              sx={{ padding: 2 }}
             />
           </Grid>
           <Grid item xs={12} md={12}>
