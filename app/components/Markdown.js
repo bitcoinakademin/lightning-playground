@@ -28,8 +28,7 @@ export default function Markdown(props) {
       h4: {
         component: Typography,
         props: {
-          variant: "caption",
-          paragraph: true,
+          variant: "h6"
         },
       },
       p: {

@@ -1,12 +1,13 @@
 "use client";
 
 import Markdown from "@/app/components/Markdown";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Backdrop, CircularProgress } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function Numbers() {
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getPost = () => {
@@ -16,6 +17,8 @@ export default function Numbers() {
       })
         .then((res) => {
           setPost(res.data);
+          setLoading(false);
+          window.scrollTo(0, 0);
         })
         .catch((err) => {
           console.log(err.response);
@@ -36,6 +39,12 @@ export default function Numbers() {
       ) : (
         <Typography>Laddar data...</Typography>
       )}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress />
+      </Backdrop>
     </Grid>
   );
 }
