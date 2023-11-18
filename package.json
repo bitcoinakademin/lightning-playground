@@ -20,6 +20,7 @@
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
     "markdown-to-jsx": "^7.3.2",
+    "moving-averages": "^4.0.6",
     "next": "13.5.5",
     "react": "^18",
     "react-dom": "^18",

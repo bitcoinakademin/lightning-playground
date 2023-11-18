@@ -26,7 +26,7 @@ export default function Resources() {
     };
     getPost();
   }, []);
-
+console.log(post);
   return (
     <Grid container spacing={2} sx={{ maxWidth: "md" }}>
       {post ? (

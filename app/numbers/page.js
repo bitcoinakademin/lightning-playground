@@ -19,6 +19,9 @@ import React, { useEffect, useState } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import {
+  ma, dma, ema, sma, wma
+} from 'moving-averages'
 
 export default function Numbers() {
   const [post, setPost] = useState(null);
@@ -30,7 +33,9 @@ export default function Numbers() {
   const [startDate, setStartDate] = useState(dayjs("2023-11-10"));
   const [endDate, setEndDate] = useState(dayjs());
   const [bitcoinData, setBitcoinData] = useState([[0,0], [0,0]]);
+  const [bitcoinMA, setBitcoinMA] = useState([0]);
   const [scaleType, setScaleType] = useState("linear");
+  const [trend, setTrend] = useState(0);
   const theme = useTheme();
 
   useEffect(() => {
@@ -65,52 +70,48 @@ export default function Numbers() {
     setDates(dates1M);
   }, []);
 
-  const handleChange = (event) => {
-    setDataType(event.target.value);
-    if (event.target.value === "1M") {
-      const dates1M = [
-        new Date(2022, 9, 16),
-        new Date(2022, 9, 18),
-        new Date(2022, 9, 19),
-        new Date(2022, 9, 20),
-        new Date(2022, 9, 21),
-        new Date(2022, 9, 22),
-      ];
-      const data1M = [2.47, 2.514, 2.522, 2.568, 2.6493, 2.654].reverse();
+  // const handleChange = (event) => {
+  //   setDataType(event.target.value);
+  //   if (event.target.value === "1M") {
+  //     const dates1M = [
+  //       new Date(2022, 9, 16),
+  //       new Date(2022, 9, 18),
+  //       new Date(2022, 9, 19),
+  //       new Date(2022, 9, 20),
+  //       new Date(2022, 9, 21),
+  //       new Date(2022, 9, 22),
+  //     ];
+  //     const data1M = [2.47, 2.514, 2.522, 2.568, 2.6493, 2.654].reverse();
 
-      setData(data1M);
-      setDates(dates1M);
-      setDataTitle("U.S 1 Month Treasury");
-    } else if (event.target.value === "6M") {
-      const data6M = [3.909, 3.902, 3.902, 3.866, 3.8108, 3.806].reverse();
-      setData(data6M);
-      setDataTitle("U.S 6 Month Treasury");
-    } else if (event.target.value === "1Y") {
-      const data1Y = [4.075, 4.073, 4.038, 4.055, 3.9854, 3.964].reverse();
-      setData(data1Y);
-      setDataTitle("U.S 1 Year Treasury");
-    } else if (event.target.value === "2Y") {
-      const data2Y = [4.118, 4.0591, 3.9707, 3.9464, 3.8713, 3.8713].reverse();
-      setData(data2Y);
-      setDataTitle("U.S 2 Year Treasury");
-    } else if (event.target.value === "5Y") {
-      const data5Y = [3.9291, 3.768, 3.7517, 3.6894, 3.6362, 3.6362].reverse();
-      setData(data5Y);
-      setDataTitle("U.S 5 Year Treasury");
-    } else if (event.target.value === "7Y") {
-      const data7Y = [3.8587, 3.6803, 3.6932, 3.6172, 3.5701, 3.5701].reverse();
-      setData(data7Y);
-      setDataTitle("U.S 7 Year Treasury");
-    } else if (event.target.value === "30Y") {
-      const data30Y = [3.638, 3.507, 3.575, 3.516, 3.52, 3.52].reverse();
-      setData(data30Y);
-      setDataTitle("U.S 30 Year Treasury");
-    }
-  };
-
-  const handleChangeScale = (event) => {
-    setScaleType(event.target.value);
-  };
+  //     setData(data1M);
+  //     setDates(dates1M);
+  //     setDataTitle("U.S 1 Month Treasury");
+  //   } else if (event.target.value === "6M") {
+  //     const data6M = [3.909, 3.902, 3.902, 3.866, 3.8108, 3.806].reverse();
+  //     setData(data6M);
+  //     setDataTitle("U.S 6 Month Treasury");
+  //   } else if (event.target.value === "1Y") {
+  //     const data1Y = [4.075, 4.073, 4.038, 4.055, 3.9854, 3.964].reverse();
+  //     setData(data1Y);
+  //     setDataTitle("U.S 1 Year Treasury");
+  //   } else if (event.target.value === "2Y") {
+  //     const data2Y = [4.118, 4.0591, 3.9707, 3.9464, 3.8713, 3.8713].reverse();
+  //     setData(data2Y);
+  //     setDataTitle("U.S 2 Year Treasury");
+  //   } else if (event.target.value === "5Y") {
+  //     const data5Y = [3.9291, 3.768, 3.7517, 3.6894, 3.6362, 3.6362].reverse();
+  //     setData(data5Y);
+  //     setDataTitle("U.S 5 Year Treasury");
+  //   } else if (event.target.value === "7Y") {
+  //     const data7Y = [3.8587, 3.6803, 3.6932, 3.6172, 3.5701, 3.5701].reverse();
+  //     setData(data7Y);
+  //     setDataTitle("U.S 7 Year Treasury");
+  //   } else if (event.target.value === "30Y") {
+  //     const data30Y = [3.638, 3.507, 3.575, 3.516, 3.52, 3.52].reverse();
+  //     setData(data30Y);
+  //     setDataTitle("U.S 30 Year Treasury");
+  //   }
+  // };
 
   const fetchBitcoinData = () => {
     const startDateUnix = dayjs(startDate).unix();
@@ -128,6 +129,7 @@ export default function Numbers() {
             return x[1];
           });
           setBitcoinData([newDates, newPrices]);
+          setBitcoinMA(ma(newPrices, trend))
           setLoading(false);
         })
         .catch((err) => {
@@ -137,13 +139,18 @@ export default function Numbers() {
     getBitcoinData(startDateUnix, endDateUnix);
   };
 
-  console.log(bitcoinData);
+  const calcBitcoinMA = (trend) => {
+    setTrend(trend);
+    setBitcoinMA(ma(bitcoinData[1], trend))
+  }
+
+  console.log(bitcoinMA);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: "md" }}>
       {post ? (
         <>
-          <Grid item xs={12} md={12}>
+          {/* <Grid item xs={12} md={12}>
             <Typography variant="h4" sx={{ mb: 1 }}>
               Test av interaktiv graf
             </Typography>
@@ -179,10 +186,10 @@ export default function Numbers() {
               maxWidth="md"
               height={400}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={12}>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              Test av bitcoin graf
+            <Typography variant="h5" sx={{ mb: 1 }}>
+              Test av bitcoingraf
             </Typography>
             <Stack direction="row" spacing={3}>
               <DatePicker
@@ -204,16 +211,9 @@ export default function Numbers() {
                 }}
                 onClick={fetchBitcoinData}
               >
-                Uppdatera graf
+                Uppdatera period
               </Button>
             </Stack>
-            <FormControl sx={{ minWidth: 200, mt: 5 }}>
-              <InputLabel>Skala</InputLabel>
-              <Select value={scaleType} label="Skala" onChange={(event) => setScaleType(event.target.value)}>
-                <MenuItem value={"linear"}>Linjär</MenuItem>
-                <MenuItem value={"log"}>Log</MenuItem>
-              </Select>
-            </FormControl>
             <LineChart
               xAxis={[
                 {
@@ -226,19 +226,58 @@ export default function Numbers() {
                   scaleType: scaleType,
                 }
               ]}
-              series={[
+              series={
+                trend !== 0 ? (
+                [
                 {
                   label: "Bitcoin pris (SEK)",
                   data: bitcoinData[1],
                   color: theme.palette.primary.main,
                   showMark: false,
                 },
-              ]}
+                
+                {
+                  label: `${trend} veckors genomsnitt`,
+                  data: bitcoinMA,
+                  color: "grey",
+                  showMark: false,
+                }
+              ]
+                )
+              : (
+              [
+                {
+                  label: "Bitcoin pris (SEK)",
+                  data: bitcoinData[1],
+                  color: theme.palette.primary.main,
+                  showMark: false,
+                },
+              ]
+              )
+            }
               width={750}
               maxWidth="md"
               height={400}
               sx={{ padding: 2 }}
             />
+            <Stack direction="row" spacing={3}>
+            <FormControl sx={{ minWidth: 200, mt: 5 }}>
+              <InputLabel>Skala</InputLabel>
+              <Select value={scaleType} label="Skala" disabled={trend == 0 ? false : true} onChange={(event) => setScaleType(event.target.value)}>
+                <MenuItem value={"linear"}>Linjär</MenuItem>
+                <MenuItem value={"log"}>Log</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ minWidth: 200, mt: 5 }}>
+              <InputLabel>Trendlinje</InputLabel>
+              <Select value={trend} label="Trendlinje" onChange={(event) => calcBitcoinMA(event.target.value)}>
+              <MenuItem value={0}>Ingen</MenuItem>
+                <MenuItem value={50}>50WMA</MenuItem>
+                <MenuItem value={100}>100WMA</MenuItem>
+                <MenuItem value={200}>200WMA</MenuItem>
+              </Select>
+            </FormControl>
+            </Stack>
           </Grid>
           <Grid item xs={12} md={12}>
             <Typography variant="h4" sx={{ mb: 1 }}>

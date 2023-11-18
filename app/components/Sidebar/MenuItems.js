@@ -1,30 +1,18 @@
 "use client";
 
 import {
-  Box,
-  List,
-  Button,
-  ListItem,
   useTheme,
   useMediaQuery,
-  Typography,
-  colors,
   Collapse,
   MenuList,
   MenuItem,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import Link from "@mui/material/Link";
-import * as NextLink from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
   HomeIcon,
-  GlobeIcon,
-  DevicesIcon,
-  Confirmations6Icon,
-  NodeIcon,
   InfoCircleIcon,
   CaretDownIcon,
   GraphIcon,
@@ -41,7 +29,7 @@ function MenuItems() {
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [openIntroduction, setOpenIntroduction] = useState(true);
+  const [openIntroduction, setOpenIntroduction] = useState(false);
   const [openNumbers, setOpenNumbers] = useState(false);
   const [openResources, setOpenResources] = useState(false);
   const [openSandbox, setOpenSandbox] = useState(false);
