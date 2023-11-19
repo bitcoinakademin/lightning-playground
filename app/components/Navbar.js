@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
-import { LightningCircleIcon, BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import MyDrawer from "./Sidebar/MyDrawer";
 
 const Navbar = () => {

@@ -26,6 +26,7 @@
     "react-dom": "^18",
     "react-icons": "^4.11.0",
     "react-use": "^17.4.0",
+    "regression": "^2.0.1",
     "webln": "^0.3.2"
   },
   "devDependencies": {

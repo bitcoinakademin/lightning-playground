@@ -254,8 +254,7 @@ function MenuItems() {
             // }}
           >
             <ListItemText>Klimat</ListItemText>
-          </MenuItem>
-         
+          </MenuItem>  
         </Collapse>
         <MenuItem
           onClick={() => handleOpen("resources")}
@@ -384,18 +383,7 @@ function MenuItems() {
                   : "black",
             }}
           >
-            <ListItemText>Lightning på webben</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/webln/use")}
-            sx={{
-              color:
-                pathname === "/webln/use"
-                  ? theme.palette.primary.main
-                  : "black",
-            }}
-          >
-            <ListItemText>Lightning i mobilen</ListItemText>
+            <ListItemText>Lightning webbplånbok</ListItemText>
           </MenuItem>
         </Collapse>
         <MenuItem
