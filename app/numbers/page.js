@@ -1,18 +1,22 @@
 "use client";
 
-import Markdown from "@/app/components/Markdown";
-import { Typography, Grid, Backdrop, CircularProgress } from "@mui/material";
+import {
+  Backdrop,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import InteractiveGraph from "./InteractiveGraph";
-import { useRouter } from "next/navigation";
-import Link from "@mui/material/Link";
-import * as NextLink from "next/link";
+import Macro from "./Macro";
+import Climate from "./Climate";
+import Intro from "./Intro";
+import Sources from "./Sources";
+import Finance from "./Finance";
+import Bitcoin from "./Bitcoin";
+import Attachments from "./Attachments";
 
 export default function Numbers() {
-  const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { push } = useRouter();
 
   useEffect(() => {
     const getPost = () => {
@@ -21,9 +25,13 @@ export default function Numbers() {
         url: `https://blog.bitcoinakademin.se/wp-json/wp/v2/pages/9795`,
       })
         .then((res) => {
-          setPost(res.data);
+          if (window.location.hash) {
+            const element = document.querySelector(window.location.hash);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }
           setLoading(false);
-          window.scrollTo(0, 0);
         })
         .catch((err) => {
           console.log(err.response);
@@ -33,38 +41,22 @@ export default function Numbers() {
   }, []);
 
   return (
-    <Grid container spacing={2} sx={{ maxWidth: "md" }}>
-      {post ? (
-        <>
-          <Grid item xs={12} md={12}>
-            <Link
-              component={NextLink}
-              href="#test"
-              variant="inherit"
-              underline="none"
-            >
-              To test
-            </Link>
-            <Typography variant="h4" sx={{ mb: 1 }}>
-              {post.title.rendered}
-            </Typography>
-            <Markdown>{post.content.rendered}</Markdown>
-          </Grid>
-
-          <InteractiveGraph />
-          <Grid item xs={12} md={12} id="test">
-            <Typography id="test">blaaah</Typography>
-          </Grid>
-        </>
-      ) : (
-        <Typography>Laddar data...</Typography>
-      )}
+    <Box spacing={2} sx={{ maxWidth: "md" }}>
+      <>
+        <Intro />
+        <Macro />
+        <Finance />
+        <Bitcoin />
+        <Attachments />
+        <Climate />
+        <Sources />
+      </>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
       >
         <CircularProgress />
       </Backdrop>
-    </Grid>
+    </Box>
   );
 }

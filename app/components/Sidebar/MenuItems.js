@@ -9,7 +9,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+} from "next/navigation";
 
 import {
   HomeIcon,
@@ -22,6 +25,7 @@ import {
   AddressBookIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useState } from "react";
+import Link from "next/link";
 
 function MenuItems() {
   const theme = useTheme();
@@ -33,16 +37,17 @@ function MenuItems() {
   const [openNumbers, setOpenNumbers] = useState(false);
   const [openResources, setOpenResources] = useState(false);
   const [openSandbox, setOpenSandbox] = useState(false);
+  const [subPath, setSubPath] = useState("");
 
   const handleOpen = (clickedSection) => {
     if (clickedSection === "introduction") {
       setOpenIntroduction(!openIntroduction);
     } else if (clickedSection === "numbers") {
-      setOpenNumbers(!openNumbers)
+      setOpenNumbers(!openNumbers);
     } else if (clickedSection === "resources") {
-      setOpenResources(!openResources)
+      setOpenResources(!openResources);
     } else if (clickedSection === "sandbox") {
-      setOpenSandbox(!openSandbox)
+      setOpenSandbox(!openSandbox);
     }
   };
 
@@ -98,92 +103,138 @@ function MenuItems() {
             />
           </ListItemIcon>
         </MenuItem>
-        <Collapse in={openIntroduction} timeout="auto" unmountOnExit sx={{ml: 4.5}}>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            sx={{
+        <Collapse
+          in={openIntroduction}
+          timeout="auto"
+          unmountOnExit
+          sx={{ ml: 4.5 }}
+        >
+                     <Link
+            href="/introduction/#introduction"
+            scroll={true}
+            style={{
+              textDecoration: "none",
               color:
-                pathname === "/introduction"
+                subPath === "#introduction"
                   ? theme.palette.primary.main
                   : "black",
             }}
           >
-            <ListItemText>Uppfinningen Bitcoin</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#introduction")}}>
+              <ListItemText>Start</ListItemText>
+            </MenuItem>
+          </Link>
+           <Link
+            href="/introduction/#the-bitcoin-innovation"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#the-bitcoin-innovation"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Dagens pengar</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#the-bitcoin-innovation")}}>
+              <ListItemText>Uppfinningen Bitcoin</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#todays-money"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#todays-money"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Är Bitcoin pengar?</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#todays-money")}}>
+              <ListItemText>Dagens pengar</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#is-bitcoin-money"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#is-bitcoin-money"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Bitcoin utöver pengar</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#is-bitcoin-money")}}>
+              <ListItemText>Är Bitcoin pengar?</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#Bitcoin-beyond-money"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#Bitcoin-beyond-money"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Statusen för Bitcoin</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#Bitcoin-beyond-money")}}>
+              <ListItemText>Bitcoin utöver pengar</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#Bitcoin-status"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#Bitcoin-status"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Hoten mot Bitcoin</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/introduction")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#Bitcoin-status")}}>
+              <ListItemText>Statusen för Bitcoin</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#Bitcoin-threats"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#Bitcoin-threats"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Framtiden</ListItemText>
-          </MenuItem>
+            <MenuItem onClick={() => {setSubPath("#Bitcoin-threats")}}>
+              <ListItemText>Hoten mot Bitcoin</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/introduction/#the-future"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#the-future"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
+          >
+            <MenuItem onClick={() => {setSubPath("#the-future")}}>
+              <ListItemText>Framtiden</ListItemText>
+            </MenuItem>
+          </Link>
         </Collapse>
         <MenuItem
           onClick={() => handleOpen("numbers")}
           sx={{
             color:
-              pathname === "/numbers"
-                ? theme.palette.primary.main
-                : "black",
+              pathname === "/numbers" ? theme.palette.primary.main : "black",
           }}
         >
           <ListItemIcon>
@@ -210,59 +261,78 @@ function MenuItems() {
             />
           </ListItemIcon>
         </MenuItem>
-        <Collapse in={openNumbers} timeout="auto" unmountOnExit sx={{ml: 4.5}}>
-          <MenuItem
-            onClick={() => router.push("/numbers")}
-            sx={{
+        <Collapse
+          in={openNumbers}
+          timeout="auto"
+          unmountOnExit
+          sx={{ ml: 4.5 }}
+        >
+          <Link
+            href="/numbers/#macro"
+            scroll={true}
+            style={{
+              textDecoration: "none",
               color:
-                pathname === "/numbers"
+                subPath === "#macro"
                   ? theme.palette.primary.main
                   : "black",
             }}
           >
-            <ListItemText>Makro</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/numbers")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#macro")}}>
+              <ListItemText>Makro</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/numbers/#finance"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#finance"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Finansmarknad</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/numbers")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#finance")}}>
+              <ListItemText>Finansmarknad</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/numbers/#bitcoin"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#bitcoin"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Bitcoin</ListItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => router.push("/numbers")}
-            // sx={{
-            //   color:
-            //     pathname === "/introduction"
-            //       ? theme.palette.primary.main
-            //       : "black",
-            // }}
+            <MenuItem onClick={() => {setSubPath("#bitcoin")}}>
+              <ListItemText>Bitcoin</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link
+            href="/numbers/#climate"
+            scroll={true}
+            style={{
+              textDecoration: "none",
+              color:
+                subPath === "#climate"
+                  ? theme.palette.primary.main
+                  : "black",
+            }}
           >
-            <ListItemText>Klimat</ListItemText>
-          </MenuItem>  
+            <MenuItem onClick={() => {setSubPath("#climate")}}>
+              <ListItemText>Klimat</ListItemText>
+            </MenuItem>
+          </Link>
         </Collapse>
         <MenuItem
           onClick={() => handleOpen("resources")}
           sx={{
             color:
-              pathname === "/resources"
-                ? theme.palette.primary.main
-                : "black",
+              pathname === "/resources" ? theme.palette.primary.main : "black",
           }}
         >
           <ListItemIcon>
@@ -289,7 +359,12 @@ function MenuItems() {
             />
           </ListItemIcon>
         </MenuItem>
-        <Collapse in={openResources} timeout="auto" unmountOnExit sx={{ml: 4.5}}>
+        <Collapse
+          in={openResources}
+          timeout="auto"
+          unmountOnExit
+          sx={{ ml: 4.5 }}
+        >
           <MenuItem
             onClick={() => router.push("/resources")}
             sx={{
@@ -334,7 +409,8 @@ function MenuItems() {
             <PhotoIcon
               style={{
                 width: "25",
-                color: pathname === "/blog" ? theme.palette.primary.main : "black",
+                color:
+                  pathname === "/blog" ? theme.palette.primary.main : "black",
               }}
             />
           </ListItemIcon>
@@ -343,10 +419,7 @@ function MenuItems() {
         <MenuItem
           onClick={() => handleOpen("sandbox")}
           sx={{
-            color:
-              pathname === "/webln"
-                ? theme.palette.primary.main
-                : "black",
+            color: pathname === "/webln" ? theme.palette.primary.main : "black",
           }}
         >
           <ListItemIcon>
@@ -354,9 +427,7 @@ function MenuItems() {
               style={{
                 width: "25",
                 color:
-                  pathname === "/webln"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/webln" ? theme.palette.primary.main : "black",
               }}
             />
           </ListItemIcon>
@@ -366,21 +437,22 @@ function MenuItems() {
               style={{
                 width: "15",
                 color:
-                  pathname === "/webln"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/webln" ? theme.palette.primary.main : "black",
               }}
             />
           </ListItemIcon>
         </MenuItem>
-        <Collapse in={openSandbox} timeout="auto" unmountOnExit sx={{ml: 4.5}}>
+        <Collapse
+          in={openSandbox}
+          timeout="auto"
+          unmountOnExit
+          sx={{ ml: 4.5 }}
+        >
           <MenuItem
             onClick={() => router.push("/webln")}
             sx={{
               color:
-                pathname === "/webln"
-                  ? theme.palette.primary.main
-                  : "black",
+                pathname === "/webln" ? theme.palette.primary.main : "black",
             }}
           >
             <ListItemText>Lightning webbplånbok</ListItemText>
@@ -389,21 +461,24 @@ function MenuItems() {
         <MenuItem
           onClick={() => router.push("/contact")}
           sx={{
-            color: pathname === "/contact" ? theme.palette.primary.main : "black",
+            color:
+              pathname === "/contact" ? theme.palette.primary.main : "black",
           }}
         >
           <ListItemIcon>
             <AddressBookIcon
               style={{
                 width: "25",
-                color: pathname === "/contact" ? theme.palette.primary.main : "black",
+                color:
+                  pathname === "/contact"
+                    ? theme.palette.primary.main
+                    : "black",
               }}
             />
           </ListItemIcon>
           <ListItemText>Kontakta oss</ListItemText>
         </MenuItem>
       </MenuList>
-      
     </>
   );
 }
