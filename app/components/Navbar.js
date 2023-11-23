@@ -1,122 +1,125 @@
 "use client";
 
 import {
-  AppBar,
   Toolbar,
-  Grid,
   useMediaQuery,
   useTheme,
   Typography,
+  IconButton,
+  Drawer,
+  Divider,
 } from "@mui/material";
-import Link from "@mui/material/Link";
-import * as NextLink from "next/link";
+import MuiAppBar from "@mui/material/AppBar";
 import { BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import MyDrawer from "./Sidebar/MyDrawer";
+import { useState } from "react";
+import styled from "@emotion/styled";
+import {
+  MenuIcon,
+  CaretLeftIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
+import MenuItems from "./MenuItems";
+
+const drawerWidth = 240;
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(["margin", "width"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
 
 const Navbar = () => {
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
   return (
     <AppBar
       sx={{
         position: "fixed",
         top: 0,
-        zIndex: 100,
         width: "100%",
         height: "60px",
       }}
+      open={open}
     >
       <Toolbar>
-        {isMobile ? (
-          <Grid
-            container
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ pt: 2, pb: 2 }}
-          >
-            <Grid
-              item
-              xs={2}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <MyDrawer />
-            </Grid>
-            <Grid
-              item
-              xs={8}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="h6">
-                <Link
-                  component={NextLink}
-                  href="/"
-                  variant="inherit"
-                  underline="none"
-                  color="white"
-                >
-                  BitcoinAkademin
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={2}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            ></Grid>
-          </Grid>
-        ) : (
-          <Grid
-            container
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid
-              item
-              md={1}
-              display="flex"
-              justifyContent="start"
-              alignItems="center"
-            >
-              <Link
-                component={NextLink}
-                href="/"
-                variant="inherit"
-                underline="none"
-                color="white"
-              >
-                <BitcoinCircleIcon style={{ width: "50", color: "white" }} />
-              </Link>
-            </Grid>
-            <Grid
-              item
-              md={11}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Link
-                component={NextLink}
-                href="/"
-                variant="inherit"
-                underline="none"
-                color="white"
-              >
-                <Typography variant="h5" fontWeight="bold">
-                 BitcoinAkademin
-                </Typography>
-              </Link>
-            </Grid>
-          </Grid>
-        )}
+        <IconButton
+          color="inherit"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{ mr: 2, ...(open && { display: "none" }) }}
+        >
+          <MenuIcon style={{ width: 30, color: "white" }} />
+        </IconButton>
+        <Typography variant="h5" noWrap component="div" sx={{color: "white"}}>
+          BitcoinAkademin
+        </Typography>
       </Toolbar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <DrawerHeader>
+        <BitcoinCircleIcon style={{ height: 50, marginRight: 150, color: theme.palette.primary.main }} />
+          <IconButton onClick={handleDrawerClose}>
+              <CaretLeftIcon
+                style={{
+                  width: "15",
+                  color: theme.palette.primary.main,
+                }}
+              />
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        {/* <Toolbar > */}
+        {/* <Image
+          src={"/images/logo.png"}
+          alt="logo"
+          height={0}
+          width={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+        /> */}
+        {/* <BitcoinCircleIcon style={{ width: "40%", marginLeft: 50, color: theme.palette.primary.main }} />
+      </Toolbar> */}
+        <MenuItems />
+      </Drawer>
     </AppBar>
   );
 };

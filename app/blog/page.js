@@ -2,7 +2,7 @@
 
 import {
   Typography,
-  Grid,
+  Stack,
   Card,
   CardContent,
   CardActionArea,
@@ -10,6 +10,7 @@ import {
   Pagination,
   CircularProgress,
   Backdrop,
+  Box,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import * as NextLink from "next/link";
@@ -48,65 +49,66 @@ export default function Blog() {
     getPosts();
   }, [page]);
 
-  console.log(page);
   return (
-    <Grid container spacing={2} sx={{ maxWidth: "md" }}>
-      <Grid item xs={12} md={12}>
-        <Typography variant="h4">Blogg</Typography>
-      </Grid>
+    <Stack
+      spacing={2}
+      display="flex"
+      flexDirection="column"
+      sx={{ maxWidth: "md" }}
+    >
+      <Typography variant="h4">Blogg</Typography>
       {posts.map((post, index) => (
-        <Grid item xs={12} md={12} key={index}>
-          <Link
-            component={NextLink}
-            href={`/blog/${post.id}`}
-            variant="inherit"
-            underline="none"
-            color="white"
-          >
-            <Card>
-              <CardActionArea>
-                <CardContent>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                    {post.date.slice(0, 10)}
-                  </Typography>
-                  <Typography variant="h5">{post.title.rendered}</Typography>
-                  <Typography
-                    variant="body2"
-                    dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered,
-                    }}
-                  />
-                  <CardMedia
-                    component="img"
-                    alt="post thumbnail"
-                    height="250"
-                    sx={{ objectFit: "contain" }}
-                    image={
-                      post._embedded["wp:featuredmedia"]
-                        ? post._embedded["wp:featuredmedia"]["0"].source_url
-                        : ""
-                    }
-                  />
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Link>
-        </Grid>
+        <Link
+          key={index}
+          component={NextLink}
+          href={`/blog/${post.id}`}
+          variant="inherit"
+          underline="none"
+          color="white"
+        >
+          <Card>
+            <CardActionArea>
+              <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                  {post.date.slice(0, 10)}
+                </Typography>
+                <Typography variant="h5">{post.title.rendered}</Typography>
+                <Typography
+                  variant="body2"
+                  dangerouslySetInnerHTML={{
+                    __html: post.excerpt.rendered,
+                  }}
+                />
+                <CardMedia
+                  component="img"
+                  alt="post thumbnail"
+                  height="250"
+                  sx={{ objectFit: "contain" }}
+                  image={
+                    post._embedded["wp:featuredmedia"]
+                      ? post._embedded["wp:featuredmedia"]["0"].source_url
+                      : ""
+                  }
+                />
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
       ))}
-      <Grid item xs={12} md={12}>
+      <Box display="flex" flexDirection="column" alignItems="center">
         <Pagination
           count={pages}
           page={page}
           color="primary"
           onChange={handleChange}
         />
-      </Grid>
+      </Box>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
       >
         <CircularProgress />
       </Backdrop>
-    </Grid>
+    </Stack>
   );
 }
