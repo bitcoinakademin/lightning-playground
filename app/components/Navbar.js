@@ -8,6 +8,8 @@ import {
   IconButton,
   Drawer,
   Divider,
+  Button,
+  Stack,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
@@ -16,8 +18,14 @@ import styled from "@emotion/styled";
 import {
   MenuIcon,
   CaretLeftIcon,
+  BitcoinIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import MenuItems from "./MenuItems";
+import useSWR from "swr";
+import { useRouter } from "next/navigation";
+import BitcoinPrice from "./Price/BitcoinPrice";
+import BlockHeight from "./Price/BlockHeight";
+import FeeEstimates from "./Price/FeeEstimates";
 
 const drawerWidth = 240;
 
@@ -47,7 +55,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+
 const Navbar = () => {
+  const router = useRouter();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -59,6 +69,8 @@ const Navbar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
   return (
     <AppBar
       sx={{
@@ -78,9 +90,14 @@ const Navbar = () => {
         >
           <MenuIcon style={{ width: 30, color: "white" }} />
         </IconButton>
-        <Typography variant="h5" noWrap component="div" sx={{color: "white"}}>
+        <IconButton onClick={() => router.push("/")} sx={{ color: "white" }}>
           BitcoinAkademin
-        </Typography>
+        </IconButton>
+        <Stack flexDirection="row" justifyContent="space-evenly" width="100%">
+          <BitcoinPrice />
+          <BlockHeight />
+          <FeeEstimates />
+        </Stack>
       </Toolbar>
       <Drawer
         sx={{
@@ -96,14 +113,20 @@ const Navbar = () => {
         open={open}
       >
         <DrawerHeader>
-        <BitcoinCircleIcon style={{ height: 50, marginRight: 150, color: theme.palette.primary.main }} />
+          <BitcoinCircleIcon
+            style={{
+              height: 50,
+              marginRight: 150,
+              color: theme.palette.primary.main,
+            }}
+          />
           <IconButton onClick={handleDrawerClose}>
-              <CaretLeftIcon
-                style={{
-                  width: "15",
-                  color: theme.palette.primary.main,
-                }}
-              />
+            <CaretLeftIcon
+              style={{
+                width: "15",
+                color: theme.palette.primary.main,
+              }}
+            />
           </IconButton>
         </DrawerHeader>
         <Divider />

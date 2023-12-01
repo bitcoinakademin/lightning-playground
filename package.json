@@ -20,6 +20,7 @@
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
     "markdown-to-jsx": "^7.3.2",
+    "mathjs": "^12.1.0",
     "moving-averages": "^4.0.6",
     "next": "13.5.5",
     "react": "^18",
@@ -27,6 +28,7 @@
     "react-icons": "^4.11.0",
     "react-use": "^17.4.0",
     "regression": "^2.0.1",
+    "swr": "^2.2.4",
     "webln": "^0.3.2"
   },
   "devDependencies": {

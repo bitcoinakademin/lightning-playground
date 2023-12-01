@@ -19,13 +19,8 @@ const Footer = () => {
         >
           <Grid
             item
-            xs={0}
-            md={1}
-          ></Grid>
-          <Grid
-            item
             xs={12}
-            md={11}
+            md={12}
             display="flex"
             flexDirection="column"
             justifyContent="center"

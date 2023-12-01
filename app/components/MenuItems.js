@@ -25,6 +25,7 @@ import {
   PhotoIcon,
   BlockIcon,
   AddressBookIcon,
+  BitcoinIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
 import Link from "next/link";
@@ -487,6 +488,26 @@ function MenuItems() {
           />
         </ListItemIcon>
         <ListItemText>Blogg</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem
+      disablePadding
+        onClick={() => router.push("/graph")}
+        sx={{
+          color: pathname === "/graph" ? theme.palette.primary.main : "black",
+        }}
+      >
+        <ListItemButton onClick={() => router.push("/graph")}>
+        <ListItemIcon>
+          <BitcoinIcon
+            style={{
+              width: "25",
+              color:
+                pathname === "/graph" ? theme.palette.primary.main : "black",
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText>Bitcoingraf</ListItemText>
         </ListItemButton>
       </ListItem>
       <ListItem

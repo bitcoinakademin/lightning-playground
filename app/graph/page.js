@@ -25,7 +25,7 @@ function InteractiveGraph() {
   const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState(dayjs("2023-11-10"));
   const [endDate, setEndDate] = useState(dayjs());
-  const [currency, setCurrency] = useState("usd");
+  const [currency, setCurrency] = useState("sek");
   const [coin, setCoin] = useState("bitcoin");
   const [bitcoinData, setBitcoinData] = useState([
     [0, 0],
@@ -82,11 +82,11 @@ function InteractiveGraph() {
     <Grid container id="interactiveGraph" spacing={2} sx={{ maxWidth: "md" }}>
       <Grid item xs={12} md={12}>
         <Typography variant="h5">
-          Interaktiv Graf
+          Bitcoingraf
         </Typography>
         <Typography sx={{ mb: 1 }}>
           Här kan du se prisutvecklingen av Bitcoin och andra cryptovalutor över
-          olika perioder. Du kan också lägga till olika trendlinjer.
+          en valfri period. Du kan också lägga till olika trendlinjer.
         </Typography>
         <Stack direction="row" spacing={3} sx={{ marginY: 3 }}>
           <FormControl sx={{ minWidth: 200, mt: 5 }}>

@@ -15,9 +15,7 @@ import {
 } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  CaretUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { CaretUpIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 
 export default function Introduction() {
   const [posts, setPosts] = useState([]);
@@ -53,34 +51,34 @@ export default function Introduction() {
 
   const navigateTop = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   return (
-    <Box spacing={2} sx={{ maxWidth: "md"}}>
+    <Box spacing={2} sx={{ maxWidth: "md" }}>
       {posts.length > 1 ? (
         <>
-          <Markdown id="introduction" style={{scrollMargin: 60}}>
+          <Markdown id="introduction" style={{ scrollMargin: 60 }}>
             {posts[0].value.data.content.rendered}
           </Markdown>
-          <Markdown id="the-bitcoin-innovation" style={{scrollMargin: 70}}>
+          <Markdown id="the-bitcoin-innovation" style={{ scrollMargin: 70 }}>
             {posts[1].value.data.content.rendered}
           </Markdown>
-          <Markdown id="todays-money" style={{scrollMargin: 70}}>
+          <Markdown id="todays-money" style={{ scrollMargin: 70 }}>
             {posts[2].value.data.content.rendered}
           </Markdown>
-          <Markdown id="is-bitcoin-money" style={{scrollMargin: 70}}>
+          <Markdown id="is-bitcoin-money" style={{ scrollMargin: 70 }}>
             {posts[3].value.data.content.rendered}
           </Markdown>
-          <Markdown id="Bitcoin-beyond-money" style={{scrollMargin: 70}}>
+          <Markdown id="Bitcoin-beyond-money" style={{ scrollMargin: 70 }}>
             {posts[4].value.data.content.rendered}
           </Markdown>
-          <Markdown id="Bitcoin-status" style={{scrollMargin: 70}}>
+          <Markdown id="Bitcoin-status" style={{ scrollMargin: 70 }}>
             {posts[5].value.data.content.rendered}
           </Markdown>
-          <Markdown id="Bitcoin-threats" style={{scrollMargin: 70}}>
+          <Markdown id="Bitcoin-threats" style={{ scrollMargin: 70 }}>
             {posts[6].value.data.content.rendered}
           </Markdown>
-          <Markdown id="the-future" style={{scrollMargin: 70}}>
+          <Markdown id="the-future" style={{ scrollMargin: 70 }}>
             {posts[7].value.data.content.rendered}
           </Markdown>
         </>
@@ -88,11 +86,14 @@ export default function Introduction() {
         <Typography>Laddar data...</Typography>
       )}
       <Tooltip title="Till toppen">
-       <Fab 
-       onClick={navigateTop}
-       color="primary" aria-label="add"  sx={{ position: 'fixed', bottom: 40, right: 40 }}>
-       <CaretUpIcon style={{ width: 20, color: "white" }} />
-      </Fab>
+        <Fab
+          onClick={navigateTop}
+          color="primary"
+          aria-label="add"
+          sx={{ position: "fixed", bottom: 40, right: 40 }}
+        >
+          <CaretUpIcon style={{ width: 20, color: "white" }} />
+        </Fab>
       </Tooltip>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
