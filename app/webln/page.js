@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import AlbyInvoice from "../components/Payments/AlbyInvoice";
 
 export default function Webln() {
   const [activeStep, setActiveStep] = useState(0);
@@ -50,7 +51,12 @@ export default function Webln() {
         Lightning Network. Här visar vi hur du kommer igång med att använda en
         webbplånbok. Häng med!
       </Typography>
-      <Stepper nonLinear activeStep={activeStep} orientation="vertical" sx={{mt: 2}}>
+      <Stepper
+        nonLinear
+        activeStep={activeStep}
+        orientation="vertical"
+        sx={{ mt: 2 }}
+      >
         {steps.map((label, index) => (
           <Step key={label}>
             <StepButton color="inherit" onClick={handleStep(index)}>
@@ -58,7 +64,11 @@ export default function Webln() {
             </StepButton>
             <StepContent>
               {activeStep === 0 && <StepOne />}
-              {activeStep === 1 && <StepTwo />}
+              {activeStep === 1 && (
+                <StepTwo>
+                  <AlbyInvoice />
+                </StepTwo>
+              )}
               {activeStep === 2 && <StepThree />}
               <Box sx={{ display: "flex", flexDirection: "row", pt: 5 }}>
                 <Button
@@ -83,7 +93,8 @@ export default function Webln() {
           <Typography>
             Det var allt om lightning med webbplånböcker! Hoppas att allt gick
             bra och att du nu känner dig redo att skicka bitcoin på webben.
-            Tveka inte att höra av dig till oss om något inte fungerade eller om du har några funderingar.
+            Tveka inte att höra av dig till oss om något inte fungerade eller om
+            du har några funderingar.
           </Typography>
         </Paper>
       )}

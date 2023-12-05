@@ -4,12 +4,10 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
-  Typography,
   IconButton,
   Drawer,
   Divider,
-  Button,
-  Stack,
+  Grid,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
@@ -21,11 +19,7 @@ import {
   BitcoinIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import MenuItems from "./MenuItems";
-import useSWR from "swr";
 import { useRouter } from "next/navigation";
-import BitcoinPrice from "./Price/BitcoinPrice";
-import BlockHeight from "./Price/BlockHeight";
-import FeeEstimates from "./Price/FeeEstimates";
 
 const drawerWidth = 240;
 
@@ -55,13 +49,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
-const Navbar = () => {
+const Navbar = ({ children }) => {
   const router = useRouter();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -70,34 +62,63 @@ const Navbar = () => {
     setOpen(false);
   };
 
-
   return (
     <AppBar
+    elevation={0} 
       sx={{
         position: "fixed",
         top: 0,
         width: "100%",
-        height: "60px",
+        bgcolor: "white",
+        borderBottom: 1,
+        borderBottomColor: "grey.300",
       }}
       open={open}
     >
       <Toolbar>
-        <IconButton
-          color="inherit"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{ mr: 2, ...(open && { display: "none" }) }}
-        >
-          <MenuIcon style={{ width: 30, color: "white" }} />
-        </IconButton>
-        <IconButton onClick={() => router.push("/")} sx={{ color: "white" }}>
-          BitcoinAkademin
-        </IconButton>
-        <Stack flexDirection="row" justifyContent="space-evenly" width="100%">
-          <BitcoinPrice />
-          <BlockHeight />
-          <FeeEstimates />
-        </Stack>
+        <Grid container>
+          <Grid item xs={3} md={"auto"}>
+            <IconButton
+              color="inherit"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: "none" }) }}
+            >
+              <MenuIcon style={{ width: 30, color: theme.palette.primary.main }} />
+            </IconButton>
+          </Grid>
+          <Grid
+            item
+            xs={6}
+            md={1.5}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <IconButton
+              onClick={() => router.push("/")}
+              sx={{ color: theme.palette.primary.main }}
+            >
+              BitcoinAkademin
+            </IconButton>
+          </Grid>
+          <Grid item xs={3} md={4.5}></Grid>
+          {isMobile ? (
+            <></>
+          ) : (
+            <>
+              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+                {children[0]}
+              </Grid>
+              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+                {children[1]}
+              </Grid>
+              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+                {children[2]}
+              </Grid>
+            </>
+          )}
+        </Grid>
       </Toolbar>
       <Drawer
         sx={{

@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { fetchInvoice } from "../components/Payments/fetchInvoice";
 
-function StepTwo() {
+function StepTwo({ children }) {
   const [nodeInfo, setNodeInfo] = useState(null);
   const [balance, setBalance] = useState(0);
   const [alert, setAlert] = useState(false);

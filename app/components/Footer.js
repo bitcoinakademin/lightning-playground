@@ -3,12 +3,13 @@ import { Grid, Link, AppBar, Toolbar, Typography } from "@mui/material";
 const Footer = () => {
   return (
     <AppBar
+    elevation={0}
       sx={{
         position: "relative",
         bottom: 0,
         zIndex: 100,
         width: "100%",
-        height: "70px",
+        bgcolor: "white",
       }}
     >
       <Toolbar>
@@ -28,11 +29,11 @@ const Footer = () => {
           >
             <Link
               href="https://bitcoinakademin.se/"
-              sx={{ color: "white", mt: 2 }}
+              sx={{ mt: 2 }}
             >
               BitcoinAkademin
             </Link>
-            <Typography variant="caption" sx={{ color: "white", mb: 1 }}>
+            <Typography variant="caption" sx={{ mb: 1, color: "#ffc93c" }}>
               @2023
             </Typography>
           </Grid>

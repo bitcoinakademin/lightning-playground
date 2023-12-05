@@ -3,12 +3,15 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ThemeRegistry from "./utils/ThemeRegistry";
 import { Box } from "@mui/material";
+import BitcoinPrice from "./components/Price/BitcoinPrice";
+import BlockHeight from "./components/Price/BlockHeight";
+import FeeEstimates from "./components/Price/FeeEstimates";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Lightning Playground",
-  description: "Testa olika Lightning Network funktioner, snabbt och enkelt",
+  title: "BitcoinAkademin",
+  description: "Lär dig förstå och använda Bitcoin och följ dess utveckling.",
 };
 
 export default function RootLayout({ children }) {
@@ -16,7 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeRegistry options={{ key: "mui" }}> 
-            <Navbar />
+            <Navbar>
+              <BitcoinPrice />
+              <BlockHeight />
+              <FeeEstimates />
+              </Navbar>
               <Box
                 sx={{
                   pt: "60px",
