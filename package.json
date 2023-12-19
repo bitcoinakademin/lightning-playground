@@ -28,6 +28,7 @@
     "markdown-to-jsx": "^7.3.2",
     "mathjs": "^12.1.0",
     "moving-averages": "^4.0.6",
+    "mui-markdown": "^1.1.11",
     "next": "13.5.5",
     "npm": "^10.2.4",
     "react": "^18",

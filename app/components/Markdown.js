@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
+import Image from "next/image";
 
 export default function Markdown(props) {
   const theme = useTheme();
@@ -14,21 +15,21 @@ export default function Markdown(props) {
       h1: {
         component: Typography,
         props: {
-          variant: "h4",
+          variant: "h2",
         },
       },
       h2: {
         component: Typography,
-        props: { variant: "h2" },
+        props: { variant: "h3" },
       },
       h3: {
         component: Typography,
-        props: { variant: "h5" },
+        props: { variant: "h4" },
       },
       h4: {
         component: Typography,
         props: {
-          variant: "h6"
+          variant: "h5"
         },
       },
       p: {
@@ -36,12 +37,12 @@ export default function Markdown(props) {
         props: { paragraph: true },
       },
       a: { component: Link },
-      img: {
-        props: {
-          width: "100%",
-          //objectFit: "scale-down",
-        },
-      },
+      // img: {
+      //   component: Image,
+      //   props: {
+      //     maxWidth: '100%'
+      //   },
+      // },
       li: {
         component: (props) => (
           <Box component="li" sx={{ mt: 1 }}>

@@ -23,9 +23,9 @@ import regression from "regression";
 
 function InteractiveGraph() {
   const [loading, setLoading] = useState(true);
-  const [startDate, setStartDate] = useState(dayjs("2023-11-10"));
+  const [startDate, setStartDate] = useState(dayjs().add(-1, "day"));
   const [endDate, setEndDate] = useState(dayjs());
-  const [currency, setCurrency] = useState("sek");
+  const [currency, setCurrency] = useState("usd");
   const [coin, setCoin] = useState("bitcoin");
   const [bitcoinData, setBitcoinData] = useState([
     [0, 0],

@@ -1,44 +1,35 @@
-import { Grid, Link, AppBar, Toolbar, Typography } from "@mui/material";
+import { Grid, Link, AppBar, Toolbar, Typography, Box } from "@mui/material";
 
 const Footer = () => {
   return (
     <AppBar
-    elevation={0}
+      elevation={0}
       sx={{
         position: "relative",
         bottom: 0,
         zIndex: 100,
         width: "100%",
-        bgcolor: "white",
+        height: 100,
+        bgcolor: "grey.100",
       }}
     >
-      <Toolbar>
+      <Grid container display="flex" height={"100%"}>
         <Grid
-          container
+          item
+          xs={12}
+          md={12}
           display="flex"
+          flexDirection="column"
           alignItems="center"
+          justifyContent="center"
+          height={"100%"}
         >
-          <Grid
-            item
-            xs={12}
-            md={12}
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Link
-              href="https://bitcoinakademin.se/"
-              sx={{ mt: 2 }}
-            >
-              BitcoinAkademin
-            </Link>
-            <Typography variant="caption" sx={{ mb: 1, color: "#ffc93c" }}>
-              @2023
-            </Typography>
-          </Grid>
+          <Link href="https://bitcoinakademin.se/">BitcoinAkademin</Link>
+          <Typography variant="caption" sx={{ color: "#ffc93c" }}>
+            @2023
+          </Typography>
         </Grid>
-      </Toolbar>
+      </Grid>
     </AppBar>
   );
 };
