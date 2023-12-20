@@ -1,3 +1,5 @@
+"use client"
+
 import { Grid, Link, AppBar, Toolbar, Typography, Box } from "@mui/material";
 
 const Footer = () => {

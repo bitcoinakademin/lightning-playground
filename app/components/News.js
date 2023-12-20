@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Tweet } from "react-tweet";
 
-function News() {
+export default function News() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const posts = [
@@ -84,5 +84,3 @@ function News() {
     </Box>
   );
 }
-
-export default News;

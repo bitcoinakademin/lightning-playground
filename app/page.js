@@ -18,23 +18,20 @@ export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const bitcoinTitle = (
-    <Typography
-      variant="h2"
-      display={"inline"}
-      sx={{ color: theme.palette.primary.main }}
-    >
-      Bitcoin
-    </Typography>
+    <div>
+      <Typography
+        variant="h2"
+        display={"inline"}
+        sx={{ color: theme.palette.primary.main }}
+      >
+        Bitcoin
+      </Typography>
+    </div>
   );
 
   return (
     <Box>
-      <Grid
-        container
-        spacing={2}
-        maxWidth={"lg"}
-        display={"flex"}
-      >
+      <Grid container spacing={2} maxWidth={"lg"} display={"flex"}>
         <Grid item xs={12} md={6} height="75vh" maxHeight={700}>
           <Box
             height="100%"
@@ -52,7 +49,7 @@ export default function Home() {
               vägen att bli viktigare än internet, mycket viktigare.
             </Typography>
             <Stack direction={"row"} spacing={3}>
-              <Link href="/#latest-news" scroll={false}>
+              <Link href="/#latest-news" scroll="false">
                 <Button variant="contained" sx={{ color: "white" }}>
                   Senaste nytt
                 </Button>
@@ -80,8 +77,8 @@ export default function Home() {
         </Grid>
       </Grid>
       <Stack spacing={15}>
-      <ContentSection />
-      <News />
+        <ContentSection />
+        <News />
       </Stack>
     </Box>
   );
