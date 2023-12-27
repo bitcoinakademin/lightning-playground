@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <Box>
       <Grid container spacing={2} maxWidth={"lg"} display={"flex"}>
-        <Grid item xs={12} md={6} height="75vh" maxHeight={700}>
+        <Grid item xs={12} md={6} height={isMobile ? "60vh" : "75vh"} maxHeight={700} minHeight={500}>
           <Box
             height="100%"
             width="80%"
@@ -54,7 +54,9 @@ export default function Home() {
                   Senaste nytt
                 </Button>
               </Link>
+              <Link href="/introduction" scroll="false">
               <Button variant="outlined">Kom igång med Bitcoin</Button>
+              </Link>
             </Stack>
           </Box>
         </Grid>
@@ -68,7 +70,7 @@ export default function Home() {
           >
             <BitcoinCircleIcon
               style={{
-                width: isMobile ? "80vw" : "30vw",
+                width: isMobile ? "0vw" : "30vw",
                 maxWidth: 500,
                 color: theme.palette.primary.main,
               }}
@@ -76,7 +78,7 @@ export default function Home() {
           </Box>
         </Grid>
       </Grid>
-      <Stack spacing={15}>
+      <Stack spacing={isMobile ? 5 : 15}>
         <ContentSection />
         <News />
       </Stack>

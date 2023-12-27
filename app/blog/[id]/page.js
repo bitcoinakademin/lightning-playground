@@ -5,6 +5,7 @@ import useSWR from "swr";
 import Markdown from "@/app/components/Markdown";
 import { useRouter } from "next/navigation";
 
+
 export default function BlogPost({ params }) {
   const router = useRouter();
   const fetcher = (url) => fetch(url).then((r) => r.json());
@@ -29,7 +30,7 @@ export default function BlogPost({ params }) {
       </Typography>
       <Markdown>{data.content.rendered}</Markdown>
       <Button
-        variant="contained"
+        variant="contained" 
         sx={{
           color: "white",
           maxWidth: 100,

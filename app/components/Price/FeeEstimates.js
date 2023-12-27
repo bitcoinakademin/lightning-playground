@@ -13,7 +13,7 @@ export default async function FeeEstimates() {
         startIcon={
           <CoinsIcon
             style={{
-              width: "25",
+              width: "25px",
             }}
           />
         }

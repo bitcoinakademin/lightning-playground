@@ -1,6 +1,7 @@
 import React from "react";
 import { BitcoinIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { Tooltip, Button } from "@mui/material";
+import Link from "next/link";
 
 export default async function BitcoinPrice() {
   const res = await fetch(
@@ -13,17 +14,19 @@ export default async function BitcoinPrice() {
 
   return (
     <Tooltip title="Bitcoinpriset just nu">
+      <Link href="/graph">
       <Button
         startIcon={
           <BitcoinIcon
             style={{
-              width: "25",
+              width: "25px",
             }}
           />
         }
       >
         {data.bitcoin.usd} USD
       </Button>
+      </Link>
     </Tooltip>
   );
 }

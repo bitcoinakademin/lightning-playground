@@ -66,7 +66,7 @@ function MenuItems() {
           <ListItemIcon>
             <HomeIcon
               style={{
-                width: "25",
+                width: "25px",
                 color: pathname === "/" ? theme.palette.primary.main : "black",
               }}
             />
@@ -85,7 +85,7 @@ function MenuItems() {
           <ListItemIcon>
             <InfoCircleIcon
               style={{
-                width: "25",
+                width: "25px",
                 color:
                   pathname === "/introduction"
                     ? theme.palette.primary.main
@@ -97,7 +97,7 @@ function MenuItems() {
           {openIntroduction ? (
             <CaretUpIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/introduction"
                     ? theme.palette.primary.main
@@ -107,7 +107,7 @@ function MenuItems() {
           ) : (
             <CaretDownIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/introduction"
                     ? theme.palette.primary.main
@@ -273,7 +273,6 @@ function MenuItems() {
             <ListItemText>Framtiden</ListItemText>
           </MenuItem>
         </Link>
-        <Divider sx={{ml: -4.5}}/>
       </Collapse>
       <ListItem
         disablePadding
@@ -285,7 +284,7 @@ function MenuItems() {
           <ListItemIcon>
             <GraphIcon
               style={{
-                width: "25",
+                width: "25px",
                 color:
                   pathname === "/numbers"
                     ? theme.palette.primary.main
@@ -297,7 +296,7 @@ function MenuItems() {
           {openNumbers ? (
             <CaretUpIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/numbers"
                     ? theme.palette.primary.main
@@ -307,7 +306,7 @@ function MenuItems() {
           ) : (
             <CaretDownIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/numbers"
                     ? theme.palette.primary.main
@@ -385,7 +384,6 @@ function MenuItems() {
             <ListItemText>Klimat</ListItemText>
           </MenuItem>
         </Link>
-        <Divider sx={{ml: -4.5}}/>
       </Collapse>
       <ListItem
         disablePadding
@@ -399,7 +397,7 @@ function MenuItems() {
           <ListItemIcon>
             <StarIcon
               style={{
-                width: "25",
+                width: "25px",
                 color:
                   pathname === "/resources"
                     ? theme.palette.primary.main
@@ -411,7 +409,7 @@ function MenuItems() {
           {openResources ? (
             <CaretUpIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/resources"
                     ? theme.palette.primary.main
@@ -421,7 +419,7 @@ function MenuItems() {
           ) : (
             <CaretDownIcon
               style={{
-                width: "15",
+                width: "15px",
                 color:
                   pathname === "/resources"
                     ? theme.palette.primary.main
@@ -468,7 +466,6 @@ function MenuItems() {
         >
           <ListItemText>Pengar</ListItemText>
         </MenuItem>
-        <Divider sx={{ ml: -4.5 }} />
       </Collapse>
       <ListItem
       disablePadding
@@ -481,7 +478,7 @@ function MenuItems() {
         <ListItemIcon>
           <PhotoIcon
             style={{
-              width: "25",
+              width: "25px",
               color:
                 pathname === "/blog" ? theme.palette.primary.main : "black",
             }}
@@ -501,7 +498,7 @@ function MenuItems() {
         <ListItemIcon>
           <BitcoinIcon
             style={{
-              width: "25",
+              width: "25px",
               color:
                 pathname === "/graph" ? theme.palette.primary.main : "black",
             }}
@@ -510,7 +507,7 @@ function MenuItems() {
         <ListItemText>Bitcoingraf</ListItemText>
         </ListItemButton>
       </ListItem>
-      <ListItem
+      {/* <ListItem
         disablePadding
         sx={{
           color: pathname === "/webln" ? theme.palette.primary.main : "black",
@@ -555,8 +552,7 @@ function MenuItems() {
         >
           <ListItemText>Lightning webbplånbok</ListItemText>
         </MenuItem>
-        <Divider sx={{ ml: -4.5 }} />
-      </Collapse>
+      </Collapse> */}
       <ListItem
         disablePadding
         sx={{
@@ -567,7 +563,7 @@ function MenuItems() {
         <ListItemIcon>
           <AddressBookIcon
             style={{
-              width: "25",
+              width: "25px",
               color:
                 pathname === "/contact" ? theme.palette.primary.main : "black",
             }}

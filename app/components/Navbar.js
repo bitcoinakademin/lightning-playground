@@ -144,7 +144,7 @@ const Navbar = ({ children }) => {
           <IconButton onClick={handleDrawerClose}>
             <CaretLeftIcon
               style={{
-                width: "15",
+                width: "20px",
                 color: theme.palette.primary.main,
               }}
             />

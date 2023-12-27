@@ -17,27 +17,20 @@ function ContentSection() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Grid
-      container
-      spacing={2}
-      maxWidth={"lg"}
-      display={"flex"}
-    >
-      <Grid item xs={12} md={12}>
-        <Typography variant="h4" align="center">Innehåll</Typography>
-        <Typography align="center">
-          BitcoinAkademin består av 6 olika delar. Avsnitten Introduktion och
+    <Grid container rowSpacing={2} columnGap={isMobile ? 0 : 8} display={"flex"} maxWidth={"lg"}>
+      <Grid item xs={12} md={12} sx={{mb: isMobile ? 0 : 5}}>
+        <Typography variant="h4" align={isMobile ? "left" : "center"}>
+          Innehåll
+        </Typography>
+        <Typography align={isMobile ? "left" : "center"}>
+          BitcoinAkademin består av fyra olika delar. Avsnitten Introduktion och
           Resurser innehåller information som hjälper nybörjare att lära sig
-          grunderna. Blogg och Siffror innehåller information för dig som vill
-          hålla dig uppdaterad om läget för Bitcoin. Våra Guider är för dig som
-          vill få praktisk erfarenhet där vi steg för steg visar allt från att
-          skicka och ta emot transaktioner till programmering av bitcoin. Den
-          sista biten av BitcoinAkademin är att den är öppen och vi ser gärna
-          att fler vill engagera sig. Kontakta oss om du vill bidra med
-          innehåll!
+          grunderna och komma igång med Bitcoin. Blogg och Siffror innehåller
+          information för dig som vill hålla dig uppdaterad om läget för
+          Bitcoin.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={2.5}>
         <Link
           component={NextLink}
           href={"/introduction"}
@@ -46,9 +39,7 @@ function ContentSection() {
           color="white"
         >
           <Card
-            sx={{
-              borderRadius: 4,
-            }}
+            sx={{ mb: 2, maxWidth: isMobile ? "90vw" : 400, borderRadius: 4 }}
           >
             <CardActionArea sx={{ height: 210 }}>
               <CardContent>
@@ -67,7 +58,7 @@ function ContentSection() {
           </Card>
         </Link>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={2.5}>
         <Link
           component={NextLink}
           href={"/numbers"}
@@ -76,9 +67,7 @@ function ContentSection() {
           color="white"
         >
           <Card
-            sx={{
-              borderRadius: 4,
-            }}
+            sx={{ mb: 2, maxWidth: isMobile ? "90vw" : 400, borderRadius: 4 }}
           >
             <CardActionArea sx={{ height: 210 }}>
               <CardContent>
@@ -97,7 +86,7 @@ function ContentSection() {
           </Card>
         </Link>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={2.5}>
         <Link
           component={NextLink}
           href={"/resources"}
@@ -106,9 +95,7 @@ function ContentSection() {
           color="white"
         >
           <Card
-            sx={{
-              borderRadius: 4,
-            }}
+            sx={{ mb: 2, maxWidth: isMobile ? "90vw" : 400, borderRadius: 4 }}
           >
             <CardActionArea sx={{ height: 210 }}>
               <CardContent>
@@ -127,7 +114,7 @@ function ContentSection() {
           </Card>
         </Link>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={2.5}>
         <Link
           component={NextLink}
           href={"/blog"}
@@ -136,9 +123,7 @@ function ContentSection() {
           color="white"
         >
           <Card
-            sx={{
-              borderRadius: 4,
-            }}
+            sx={{ mb: 2, maxWidth: isMobile ? "90vw" : 400, borderRadius: 4 }}
           >
             <CardActionArea sx={{ height: 210 }}>
               <CardContent>
@@ -151,66 +136,6 @@ function ContentSection() {
                 <Typography variant="subtitle1">
                   Under Blogg hittar du löpande uppföljningar kring utvecklingen
                   av Bitcoins ekosystem och annat spännande vi lärt oss.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Link>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Link
-          component={NextLink}
-          href={"/webln"}
-          variant="inherit"
-          underline="none"
-          color="white"
-        >
-          <Card
-            sx={{
-              borderRadius: 4,
-            }}
-          >
-            <CardActionArea sx={{ height: 210 }}>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  sx={{ color: theme.palette.primary.main }}
-                >
-                  Guider
-                </Typography>
-                <Typography variant="subtitle1">
-                  Våra guider hjälper dig med allt från att skaffa din första
-                  plånbok till att utveckla dina egna bitcoinlösningar.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Link>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Link
-          component={NextLink}
-          href={"/contact"}
-          variant="inherit"
-          underline="none"
-          color="white"
-        >
-          <Card
-            sx={{
-              borderRadius: 4,
-            }}
-          >
-            <CardActionArea sx={{ height: 210 }}>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  sx={{ color: theme.palette.primary.main }}
-                >
-                  Kontakt
-                </Typography>
-                <Typography variant="subtitle1">
-                  Bitcoin är open source och Bitcoinakademin är såklart lika
-                  öppet. Hör av dej om du vill vara med!
                 </Typography>
               </CardContent>
             </CardActionArea>

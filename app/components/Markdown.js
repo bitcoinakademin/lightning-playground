@@ -29,7 +29,7 @@ export default function Markdown(props) {
       h4: {
         component: Typography,
         props: {
-          variant: "h5"
+          variant: "h5",
         },
       },
       p: {
@@ -37,12 +37,13 @@ export default function Markdown(props) {
         props: { paragraph: true },
       },
       a: { component: Link },
-      // img: {
-      //   component: Image,
-      //   props: {
-      //     maxWidth: '100%'
-      //   },
-      // },
+      img: {
+        //component: Image,
+        props: {
+          width: isMobile ? "100%" : "auto",
+          height: isMobile ? "auto" : "auto",
+        },
+      },
       li: {
         component: (props) => (
           <Box component="li" sx={{ mt: 1 }}>

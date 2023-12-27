@@ -42,7 +42,7 @@ export default function News() {
     <Box
       display="flex"
       justifyContent="center"
-      alignItems="center"
+      alignItems={isMobile ? "start" : "center"}
       flexDirection="column"
     >
       <Typography

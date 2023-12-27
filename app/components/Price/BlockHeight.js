@@ -12,7 +12,7 @@ export default async function BlockHeight() {
         startIcon={
           <BlockIcon
             style={{
-              width: "25",
+              width: "25px",
             }}
           />
         }
