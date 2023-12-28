@@ -32,7 +32,14 @@ export default function Home() {
   return (
     <Box>
       <Grid container spacing={2} maxWidth={"lg"} display={"flex"}>
-        <Grid item xs={12} md={6} height={isMobile ? "60vh" : "75vh"} maxHeight={700} minHeight={500}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          height={isMobile ? "60vh" : "75vh"}
+          maxHeight={700}
+          minHeight={500}
+        >
           <Box
             height="100%"
             width="80%"
@@ -55,7 +62,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/introduction" scroll="false">
-              <Button variant="outlined">Kom igång med Bitcoin</Button>
+                <Button variant="outlined">Kom igång med Bitcoin</Button>
               </Link>
             </Stack>
           </Box>

@@ -8,6 +8,8 @@ import {
   Fab,
   Tabs,
   Tab,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import Markdown from "@/app/components/Markdown";
 import React, { useState } from "react";
@@ -18,6 +20,9 @@ import useSWR from "swr";
 
 export default function Numbers() {
   const [value, setValue] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,9 +45,9 @@ export default function Numbers() {
   const navigateTop = () => {
     window.scrollTo(0, 0);
   };
-
+  
   return (
-    <Box spacing={2} sx={{ maxWidth: "md" }}>
+    <Box spacing={2} sx={{ maxWidth: "md", overflow: isMobile && "hidden" }}>
           <Typography variant="h3">Siffror</Typography>
           <Typography variant="body1" sx={{ mb: 3 }}>
             Här hittar du statusen för Bitcoin just nu tillsammans med makro-
