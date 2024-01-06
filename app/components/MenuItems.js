@@ -4,16 +4,14 @@ import {
   useTheme,
   useMediaQuery,
   Collapse,
-  MenuList,
   MenuItem,
   ListItemIcon,
   ListItemText,
   List,
   ListItem,
   ListItemButton,
-  Divider,
 } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   HomeIcon,
@@ -23,10 +21,9 @@ import {
   GraphIcon,
   StarIcon,
   PhotoIcon,
-  BlockIcon,
   AddressBookIcon,
-  BitcoinIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
+import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import { useState } from "react";
 import Link from "next/link";
 
@@ -36,8 +33,11 @@ function MenuItems() {
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const searchParams = useSearchParams();
+  const search = searchParams.get("sektion");
+
   const [openIntroduction, setOpenIntroduction] = useState(false);
-  const [openNumbers, setOpenNumbers] = useState(false);
+  const [openSiffror, setOpenSiffror] = useState(false);
   const [openResources, setOpenResources] = useState(false);
   const [openSandbox, setOpenSandbox] = useState(false);
   const [subPath, setSubPath] = useState("");
@@ -45,10 +45,11 @@ function MenuItems() {
   const handleOpen = (clickedSection) => {
     if (clickedSection === "introduction") {
       setOpenIntroduction(!openIntroduction);
-    } else if (clickedSection === "numbers") {
-      setOpenNumbers(!openNumbers);
+    } else if (clickedSection === "siffror") {
+      setOpenSiffror(!openSiffror);
     } else if (clickedSection === "resources") {
       setOpenResources(!openResources);
+      router.push("/resurser")
     } else if (clickedSection === "sandbox") {
       setOpenSandbox(!openSandbox);
     }
@@ -78,7 +79,7 @@ function MenuItems() {
         disablePadding
         sx={{
           color:
-            pathname === "/introduction" ? theme.palette.primary.main : "black",
+            pathname === "/introduktion" ? theme.palette.primary.main : "black",
         }}
       >
         <ListItemButton onClick={() => handleOpen("introduction")}>
@@ -87,7 +88,7 @@ function MenuItems() {
               style={{
                 width: "25px",
                 color:
-                  pathname === "/introduction"
+                  pathname === "/introduktion"
                     ? theme.palette.primary.main
                     : "black",
               }}
@@ -99,7 +100,7 @@ function MenuItems() {
               style={{
                 width: "15px",
                 color:
-                  pathname === "/introduction"
+                  pathname === "/introduktion"
                     ? theme.palette.primary.main
                     : "black",
               }}
@@ -109,7 +110,7 @@ function MenuItems() {
               style={{
                 width: "15px",
                 color:
-                  pathname === "/introduction"
+                  pathname === "/introduktion"
                     ? theme.palette.primary.main
                     : "black",
               }}
@@ -124,152 +125,131 @@ function MenuItems() {
         sx={{ ml: 4.5 }}
       >
         <Link
-          href="/introduction/#introduction"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "start" },
+          }}
           style={{
             textDecoration: "none",
-            color:
-              subPath === "#introduction"
-                ? theme.palette.primary.main
-                : "black",
+            color: search === "start" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#introduction");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Start</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#the-bitcoin-innovation"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "uppfinningen-bitcoin" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#the-bitcoin-innovation"
+              search === "uppfinningen-bitcoin"
                 ? theme.palette.primary.main
-                : "black",
+                : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#the-bitcoin-innovation");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Uppfinningen Bitcoin</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#todays-money"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "dagens-pengar-och-vagen-hit" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#todays-money"
-                ? theme.palette.primary.main
-                : "black",
+              search === "dagens-pengar-och-vagen-hit" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#todays-money");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Dagens pengar</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#is-bitcoin-money"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "ar-bitcoin-pengar" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#is-bitcoin-money"
+              search === "ar-bitcoin-pengar"
                 ? theme.palette.primary.main
-                : "black",
+                : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#is-bitcoin-money");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Är Bitcoin pengar?</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#Bitcoin-beyond-money"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "bitcoin-utover-pengar" },
+          }}
           scroll={true}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#Bitcoin-beyond-money"
+              search === "bitcoin-utover-pengar"
                 ? theme.palette.primary.main
-                : "black",
+                : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#Bitcoin-beyond-money");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Bitcoin utöver pengar</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#Bitcoin-status"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "statusen-for-bitcoin" },
+          }}
           scroll={true}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#Bitcoin-status"
-                ? theme.palette.primary.main
-                : "black",
+              search === "statusen-for-bitcoin" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#Bitcoin-status");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Statusen för Bitcoin</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#Bitcoin-threats"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "hoten-mot-bitcoin" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#Bitcoin-threats"
+              search === "hoten-mot-bitcoin"
                 ? theme.palette.primary.main
-                : "black",
+                : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#Bitcoin-threats");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Hoten mot Bitcoin</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/introduction/#the-future"
-          scroll={true}
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "framtiden" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#the-future" ? theme.palette.primary.main : "black",
+              search === "framtiden" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#the-future");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Framtiden</ListItemText>
           </MenuItem>
         </Link>
@@ -277,28 +257,28 @@ function MenuItems() {
       <ListItem
         disablePadding
         sx={{
-          color: pathname === "/numbers" ? theme.palette.primary.main : "black",
+          color: pathname === "/siffror" ? theme.palette.primary.main : "black",
         }}
       >
-        <ListItemButton onClick={() => handleOpen("numbers")}>
+        <ListItemButton onClick={() => handleOpen("siffror")}>
           <ListItemIcon>
             <GraphIcon
               style={{
                 width: "25px",
                 color:
-                  pathname === "/numbers"
+                  pathname === "/siffror"
                     ? theme.palette.primary.main
                     : "black",
               }}
             />
           </ListItemIcon>
           <ListItemText>Siffror</ListItemText>
-          {openNumbers ? (
+          {openSiffror ? (
             <CaretUpIcon
               style={{
                 width: "15px",
                 color:
-                  pathname === "/numbers"
+                  pathname === "/siffror"
                     ? theme.palette.primary.main
                     : "black",
               }}
@@ -308,7 +288,7 @@ function MenuItems() {
               style={{
                 width: "15px",
                 color:
-                  pathname === "/numbers"
+                  pathname === "/siffror"
                     ? theme.palette.primary.main
                     : "black",
               }}
@@ -316,195 +296,130 @@ function MenuItems() {
           )}
         </ListItemButton>
       </ListItem>
-      <Collapse in={openNumbers} timeout="auto" unmountOnExit sx={{ ml: 4.5 }}>
+      <Collapse in={openSiffror} timeout="auto" unmountOnExit sx={{ ml: 4.5 }}>
         <Link
-          href="/numbers/#macro"
-          scroll={true}
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "introduktion" },
+          }}
           style={{
             textDecoration: "none",
-            color: subPath === "#macro" ? theme.palette.primary.main : "black",
+            color:
+              search === "introduktion" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#macro");
-            }}
-          >
+          <MenuItem>
+            <ListItemText>Introduktion</ListItemText>
+          </MenuItem>
+        </Link>
+        <Link
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "makro" },
+          }}
+          style={{
+            textDecoration: "none",
+            color: search === "makro" ? theme.palette.primary.main : "gray",
+          }}
+        >
+          <MenuItem>
             <ListItemText>Makro</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/numbers/#finance"
-          scroll={true}
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "finansmarknad" },
+          }}
           style={{
             textDecoration: "none",
             color:
-              subPath === "#finance" ? theme.palette.primary.main : "black",
+              search === "finansmarknad" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#finance");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Finansmarknad</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/numbers/#bitcoin"
-          scroll={true}
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "bitcoin" },
+          }}
           style={{
             textDecoration: "none",
-            color:
-              subPath === "#bitcoin" ? theme.palette.primary.main : "black",
+            color: search === "bitcoin" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#bitcoin");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Bitcoin</ListItemText>
           </MenuItem>
         </Link>
         <Link
-          href="/numbers/#climate"
-          scroll={true}
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "klimat" },
+          }}
           style={{
             textDecoration: "none",
-            color:
-              subPath === "#climate" ? theme.palette.primary.main : "black",
+            color: search === "klimat" ? theme.palette.primary.main : "gray",
           }}
         >
-          <MenuItem
-            onClick={() => {
-              setSubPath("#climate");
-            }}
-          >
+          <MenuItem>
             <ListItemText>Klimat</ListItemText>
+          </MenuItem>
+        </Link>
+        <Link
+          href={{
+            pathname: "/siffror",
+            query: { sektion: "kallor-och-bilagor" },
+          }}
+          style={{
+            textDecoration: "none",
+            color: search === "kallor-och-bilagor" ? theme.palette.primary.main : "gray",
+          }}
+        >
+          <MenuItem>
+            <ListItemText>Källor & bilagor</ListItemText>
           </MenuItem>
         </Link>
       </Collapse>
       <ListItem
         disablePadding
-        onClick={() => handleOpen("resources")}
+        onClick={() => router.push("/blogg")}
         sx={{
-          color:
-            pathname === "/resources" ? theme.palette.primary.main : "black",
+          color: pathname === "/blogg" ? theme.palette.primary.main : "black",
         }}
       >
-        <ListItemButton onClick={() => handleOpen("resources")}>
+        <ListItemButton onClick={() => router.push("/blogg")}>
           <ListItemIcon>
-            <StarIcon
+            <PhotoIcon
               style={{
                 width: "25px",
                 color:
-                  pathname === "/resources"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/blogg" ? theme.palette.primary.main : "black",
               }}
             />
           </ListItemIcon>
-          <ListItemText>Resurser</ListItemText>
-          {openResources ? (
-            <CaretUpIcon
-              style={{
-                width: "15px",
-                color:
-                  pathname === "/resources"
-                    ? theme.palette.primary.main
-                    : "black",
-              }}
-            />
-          ) : (
-            <CaretDownIcon
-              style={{
-                width: "15px",
-                color:
-                  pathname === "/resources"
-                    ? theme.palette.primary.main
-                    : "black",
-              }}
-            />
-          )}
-        </ListItemButton>
-      </ListItem>
-      <Collapse
-        in={openResources}
-        timeout="auto"
-        unmountOnExit
-        sx={{ ml: 4.5 }}
-      >
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          sx={{
-            color:
-              pathname === "/resources" ? theme.palette.primary.main : "black",
-          }}
-        >
-          <ListItemText>Kom igång med Bitcoin</ListItemText>
-        </MenuItem>
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          // sx={{
-          //   color:
-          //     pathname === "/introduction"
-          //       ? theme.palette.primary.main
-          //       : "black",
-          // }}
-        >
-          <ListItemText>Eurodollar</ListItemText>
-        </MenuItem>
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          // sx={{
-          //   color:
-          //     pathname === "/introduction"
-          //       ? theme.palette.primary.main
-          //       : "black",
-          // }}
-        >
-          <ListItemText>Pengar</ListItemText>
-        </MenuItem>
-      </Collapse>
-      <ListItem
-      disablePadding
-        onClick={() => router.push("/blog")}
-        sx={{
-          color: pathname === "/blog" ? theme.palette.primary.main : "black",
-        }}
-      >
-        <ListItemButton onClick={() => router.push("/blog")}>
-        <ListItemIcon>
-          <PhotoIcon
-            style={{
-              width: "25px",
-              color:
-                pathname === "/blog" ? theme.palette.primary.main : "black",
-            }}
-          />
-        </ListItemIcon>
-        <ListItemText>Blogg</ListItemText>
+          <ListItemText>Blogg</ListItemText>
         </ListItemButton>
       </ListItem>
       <ListItem
-      disablePadding
-        onClick={() => router.push("/graph")}
+        disablePadding
+        onClick={() => router.push("/graf")}
         sx={{
-          color: pathname === "/graph" ? theme.palette.primary.main : "black",
+          color: pathname === "/graf" ? theme.palette.primary.main : "black",
         }}
       >
-        <ListItemButton onClick={() => router.push("/graph")}>
-        <ListItemIcon>
-          <BitcoinIcon
-            style={{
-              width: "25px",
-              color:
-                pathname === "/graph" ? theme.palette.primary.main : "black",
-            }}
-          />
-        </ListItemIcon>
-        <ListItemText>Bitcoingraf</ListItemText>
+        <ListItemButton onClick={() => router.push("/graf")}>
+          <ListItemIcon>
+            <TimelineOutlinedIcon               style={{
+                width: "25px",
+                color:
+                  pathname === "/graf" ? theme.palette.primary.main : "black",
+              }}/>
+          </ListItemIcon>
+          <ListItemText>Graf</ListItemText>
         </ListItemButton>
       </ListItem>
       {/* <ListItem
@@ -553,23 +468,107 @@ function MenuItems() {
           <ListItemText>Lightning webbplånbok</ListItemText>
         </MenuItem>
       </Collapse> */}
+       <ListItem
+        disablePadding
+        onClick={() => handleOpen("resources")}
+        sx={{
+          color:
+            pathname === "/resurser" ? theme.palette.primary.main : "black",
+        }}
+      >
+        <ListItemButton onClick={() => handleOpen("resources")}>
+          <ListItemIcon>
+            <StarIcon
+              style={{
+                width: "25px",
+                color:
+                  pathname === "/resurser"
+                    ? theme.palette.primary.main
+                    : "black",
+              }}
+            />
+          </ListItemIcon>
+          <ListItemText>Resurser</ListItemText>
+          {/* {openResources ? (
+            <CaretUpIcon
+              style={{
+                width: "15px",
+                color:
+                  pathname === "/resources"
+                    ? theme.palette.primary.main
+                    : "black",
+              }}
+            />
+          ) : (
+            <CaretDownIcon
+              style={{
+                width: "15px",
+                color:
+                  pathname === "/resources"
+                    ? theme.palette.primary.main
+                    : "black",
+              }}
+            />
+          )} */}
+        </ListItemButton>
+      </ListItem>
+      {/* <Collapse
+        in={openResources}
+        timeout="auto"
+        unmountOnExit
+        sx={{ ml: 4.5 }}
+      >
+        <MenuItem
+          onClick={() => router.push("/resources")}
+          sx={{
+            color:
+              pathname === "/resources" ? theme.palette.primary.main : "black",
+          }}
+        >
+          <ListItemText>Kom igång med Bitcoin</ListItemText>
+        </MenuItem>
+        <MenuItem
+          onClick={() => router.push("/resources")}
+          // sx={{
+          //   color:
+          //     pathname === "/introduktion"
+          //       ? theme.palette.primary.main
+          //       : "black",
+          // }}
+        >
+          <ListItemText>Eurodollar</ListItemText>
+        </MenuItem>
+        <MenuItem
+          onClick={() => router.push("/resources")}
+          // sx={{
+          //   color:
+          //     pathname === "/introduktion"
+          //       ? theme.palette.primary.main
+          //       : "black",
+          // }}
+        >
+          <ListItemText>Pengar</ListItemText>
+        </MenuItem>
+      </Collapse> */}
       <ListItem
         disablePadding
         sx={{
-          color: pathname === "/contact" ? theme.palette.primary.main : "black",
+          color: pathname === "/kontakt" ? theme.palette.primary.main : "black",
         }}
       >
-        <ListItemButton onClick={() => router.push("/contact")}>
-        <ListItemIcon>
-          <AddressBookIcon
-            style={{
-              width: "25px",
-              color:
-                pathname === "/contact" ? theme.palette.primary.main : "black",
-            }}
-          />
-        </ListItemIcon>
-        <ListItemText>Kontakta oss</ListItemText>
+        <ListItemButton onClick={() => router.push("/kontakt")}>
+          <ListItemIcon>
+            <AddressBookIcon
+              style={{
+                width: "25px",
+                color:
+                  pathname === "/kontakt"
+                    ? theme.palette.primary.main
+                    : "black",
+              }}
+            />
+          </ListItemIcon>
+          <ListItemText>Kontakt</ListItemText>
         </ListItemButton>
       </ListItem>
     </List>

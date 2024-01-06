@@ -8,10 +8,10 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import Link from "@mui/material/Link";
 import ContentSection from "./components/ContentSection";
 import { BitcoinCircleIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import News from "./components/News";
+import Link from "next/link";
 
 export default function Home() {
   const theme = useTheme();
@@ -56,12 +56,17 @@ export default function Home() {
               vägen att bli viktigare än internet, mycket viktigare.
             </Typography>
             <Stack direction={"row"} spacing={3}>
-              <Link href="/#latest-news" scroll="false">
+              <Link href="/#latest-news">
                 <Button variant="contained" sx={{ color: "white" }}>
                   Senaste nytt
                 </Button>
               </Link>
-              <Link href="/introduction" scroll="false">
+              <Link
+                href={{
+                  pathname: "/introduktion",
+                  query: { sektion: "start" },
+                }}
+              >
                 <Button variant="outlined">Kom igång med Bitcoin</Button>
               </Link>
             </Stack>

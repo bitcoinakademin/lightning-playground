@@ -48,7 +48,7 @@ export default function Blog() {
       sx={{ maxWidth: "md", mb: 5 }}
     >
       <Box>
-        <Typography variant="h4">Blogg</Typography>
+        <Typography variant="h3">Blogg</Typography>
         <Typography>
           Här finns våra bloggposter där vi dyker djupare ner i olika Bitcoin
           relaterade ämnen.
@@ -58,10 +58,14 @@ export default function Blog() {
         <Link
           key={index}
           component={NextLink}
-          href={`/blog/${post.id}`}
+          href={{
+            pathname: `/blogg/${post.slug}`,
+            query: { id: `${post.id}` },
+          }}
           variant="inherit"
           underline="none"
           color="white"
+          passHref
         >
           <Card sx={{ mb: 2, width: isMobile ? "90vw" : 800, borderRadius: 4 }}>
             <CardActionArea>

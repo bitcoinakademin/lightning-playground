@@ -1,20 +1,25 @@
+"use client"
+
 import React from "react";
 import { BitcoinIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { Tooltip, Button } from "@mui/material";
+import { Tooltip, Button, CircularProgress, Typography } from "@mui/material";
 import Link from "next/link";
+import useSWR from "swr";
 
-export default async function BitcoinPrice() {
-  const res = await fetch(
-    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
-    {
-      next: { revalidate: 60 }, // Will revalidate every 30 seconds
-    }
+export default function BitcoinPrice() {
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const { data, error } = useSWR(
+    `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`,
+    fetcher
   );
-  const data = await res.json();
+
+  if (error)
+    return <Typography>Ingen data tillgänglig</Typography>;
+  if (!data) return <CircularProgress />;
 
   return (
     <Tooltip title="Bitcoinpriset just nu">
-      <Link href="/graph">
+      <Link href="/graf">
       <Button
         startIcon={
           <BitcoinIcon

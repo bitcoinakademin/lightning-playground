@@ -20,6 +20,9 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import MenuItems from "./MenuItems";
 import { useRouter } from "next/navigation";
+import BitcoinPrice from "./Price/BitcoinPrice";
+import BlockHeight from "./Price/BlockHeight";
+import FeeEstimates from "./Price/FeeEstimates";
 
 const drawerWidth = 240;
 
@@ -97,7 +100,7 @@ const Navbar = ({ children }) => {
           >
             <IconButton
               onClick={() => router.push("/")}
-              sx={{ color: theme.palette.primary.main }}
+              sx={{ color: theme.palette.primary.main, ml: 2 }}
             >
               BitcoinAkademin
             </IconButton>
@@ -108,13 +111,13 @@ const Navbar = ({ children }) => {
           ) : (
             <>
               <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
-                {children[0]}
+                <BitcoinPrice />
               </Grid>
               <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
-                {children[1]}
+                <BlockHeight />
               </Grid>
               <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
-                {children[2]}
+                <FeeEstimates />
               </Grid>
             </>
           )}
@@ -129,9 +132,10 @@ const Navbar = ({ children }) => {
             boxSizing: "border-box",
           },
         }}
-        variant="persistent"
+        variant={isMobile ? "temporary" : "persistent"}
         anchor="left"
         open={open}
+        onClose={handleDrawerClose}
       >
         <DrawerHeader>
           <BitcoinCircleIcon

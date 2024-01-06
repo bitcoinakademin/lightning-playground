@@ -2,9 +2,6 @@ import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ThemeRegistry from "./utils/ThemeRegistry";
-import BitcoinPrice from "./components/Price/BitcoinPrice";
-import BlockHeight from "./components/Price/BlockHeight";
-import FeeEstimates from "./components/Price/FeeEstimates";
 import ContentLayout from "./components/ContentLayout";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,11 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeRegistry options={{ key: "mui" }}>
-          <Navbar>
-            <BitcoinPrice />
-            <BlockHeight />
-            <FeeEstimates />
-          </Navbar>
+          <Navbar />
           <ContentLayout children={children} />
           <Footer />
         </ThemeRegistry>

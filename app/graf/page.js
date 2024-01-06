@@ -10,8 +10,8 @@ import {
   FormControl,
   MenuItem,
   InputLabel,
-  Stack,
   Button,
+  useMediaQuery,
 } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -27,6 +27,8 @@ function InteractiveGraph() {
   const [endDate, setEndDate] = useState(dayjs());
   const [currency, setCurrency] = useState("usd");
   const [coin, setCoin] = useState("bitcoin");
+  const [chartCurrency, setChartCurrency] = useState("usd");
+  const [chartCoin, setChartCoin] = useState("bitcoin");
   const [bitcoinData, setBitcoinData] = useState([
     [0, 0],
     [0, 0],
@@ -36,6 +38,7 @@ function InteractiveGraph() {
   const [scaleType, setScaleType] = useState("linear");
   const [trend, setTrend] = useState(0);
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     fetchBitcoinData();
@@ -63,7 +66,8 @@ function InteractiveGraph() {
 
           //TODO fix regression
           setBitcoinRegression(regression.linear(res.data.prices));
-
+          setChartCoin(coin)
+          setChartCurrency(currency)
           setLoading(false);
         })
         .catch((err) => {
@@ -74,6 +78,7 @@ function InteractiveGraph() {
   };
 
   const calcBitcoinMA = (trend) => {
+    fetchBitcoinData();
     setTrend(trend);
     setBitcoinMA(ma(bitcoinData[1], trend));
   };
@@ -81,20 +86,22 @@ function InteractiveGraph() {
   return (
     <Grid container id="interactiveGraph" spacing={2} sx={{ maxWidth: "md" }}>
       <Grid item xs={12} md={12}>
-        <Typography variant="h5">
-          Bitcoingraf
+        <Typography variant="h3">
+          Graf
         </Typography>
         <Typography sx={{ mb: 1 }}>
           Här kan du se prisutvecklingen av Bitcoin och andra cryptovalutor över
-          en valfri period. Du kan också lägga till olika trendlinjer.
+          en valfri period.
         </Typography>
-        <Stack direction="row" spacing={3} sx={{ marginY: 3 }}>
-          <FormControl sx={{ minWidth: 200, mt: 5 }}>
+        </Grid>
+        <Grid item xs={4} md={3}>
+          <FormControl sx={{ width: isMobile ? 100 : 200 }}>
             <InputLabel>Cryptovaluta</InputLabel>
             <Select
               value={coin}
               label="Cryptovaluta"
               onChange={(event) => setCoin(event.target.value)}
+              size="small"
             >
               <MenuItem value={"bitcoin"}>Bitcoin</MenuItem>
               <MenuItem value={"ethereum"}>Ethereum</MenuItem>
@@ -103,29 +110,71 @@ function InteractiveGraph() {
               <MenuItem value={"dogecoin"}>Dogecoin</MenuItem>
             </Select>
           </FormControl>
-          <FormControl sx={{ minWidth: 200, mt: 5 }}>
+          </Grid>
+          <Grid item xs={8} md={9}>
+          <FormControl sx={{ width: 200 }}>
             <InputLabel>Valuta</InputLabel>
             <Select
               value={currency}
               label="Valuta"
               onChange={(event) => setCurrency(event.target.value)}
+              size="small"
             >
               <MenuItem value={"sek"}>Svenska Kronor</MenuItem>
               <MenuItem value={"usd"}>Amerikanska Dollar</MenuItem>
             </Select>
           </FormControl>
-        </Stack>
-        <Stack direction="row" spacing={3}>
+        </Grid>
+        {/* <Grid item xs={4} md={3}>
+          <FormControl sx={{ width: isMobile ? 100 : 200 }}>
+            <InputLabel>Skala</InputLabel>
+            <Select
+              value={scaleType}
+              label="Skala"
+              disabled={trend == 0 ? false : true}
+              onChange={(event) => setScaleType(event.target.value)}
+              size="small"
+            >
+              <MenuItem value={"linear"}>Linjär</MenuItem>
+              <MenuItem value={"log"}>Log</MenuItem>
+            </Select>
+          </FormControl>
+          </Grid>
+          <Grid item xs={8} md={9}>
+          <FormControl sx={{width: 200}}>
+            <InputLabel>Trendlinje</InputLabel>
+            <Select
+              value={trend}
+              label="Trendlinje"
+              onChange={(event) => calcBitcoinMA(event.target.value)}
+              size="small"
+            >
+              <MenuItem value={0}>Ingen</MenuItem>
+              <MenuItem value={50}>50WMA</MenuItem>
+              <MenuItem value={100}>100WMA</MenuItem>
+              <MenuItem value={200}>200WMA</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid> */}
+        <Grid item xs={6} md={3}>
           <DatePicker
             label="Från"
             value={startDate}
             onChange={(newValue) => setStartDate(newValue)}
+            slotProps={{ textField: { size: 'small' } }}
+            sx={{ width: isMobile ? 150 : 200 }}
           />
+          </Grid>
+          <Grid item xs={6} md={9}>
           <DatePicker
             label="Till"
             value={endDate}
             onChange={(newValue) => setEndDate(newValue)}
+            slotProps={{ textField: { size: 'small' } }}
+            sx={{ width: isMobile ? 150 : 200 }}
           />
+          </Grid>
+          <Grid item xs={6} md={3}>
           <Button
             variant="contained"
             sx={{
@@ -137,7 +186,8 @@ function InteractiveGraph() {
           >
             Uppdatera
           </Button>
-        </Stack>
+        </Grid>
+        <Grid item xs={12} md={12}>
         <LineChart
           xAxis={[
             {
@@ -154,7 +204,7 @@ function InteractiveGraph() {
             trend !== 0
               ? [
                   {
-                    label: `${coin} pris (${currency})`,
+                    label: `${chartCoin}-pris (${chartCurrency})`,
                     data: bitcoinData[1],
                     color: theme.palette.primary.main,
                     showMark: false,
@@ -169,45 +219,17 @@ function InteractiveGraph() {
                 ]
               : [
                   {
-                    label: `${coin} pris (${currency})`,
+                    label: `${chartCoin}-pris (${chartCurrency})`,
                     data: bitcoinData[1],
                     color: theme.palette.primary.main,
                     showMark: false,
                   },
                 ]
           }
-          width={750}
-          maxWidth="md"
-          height={400}
-          sx={{ padding: 2 }}
+          width={isMobile ? 375 : 900}
+          height={isMobile ? 300 : 400}
+          sx={{ padding: 1 }}
         />
-        <Stack direction="row" spacing={3}>
-          <FormControl sx={{ minWidth: 200, mt: 5 }}>
-            <InputLabel>Skala</InputLabel>
-            <Select
-              value={scaleType}
-              label="Skala"
-              disabled={trend == 0 ? false : true}
-              onChange={(event) => setScaleType(event.target.value)}
-            >
-              <MenuItem value={"linear"}>Linjär</MenuItem>
-              <MenuItem value={"log"}>Log</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ minWidth: 200, mt: 5 }}>
-            <InputLabel>Trendlinje</InputLabel>
-            <Select
-              value={trend}
-              label="Trendlinje"
-              onChange={(event) => calcBitcoinMA(event.target.value)}
-            >
-              <MenuItem value={0}>Ingen</MenuItem>
-              <MenuItem value={50}>50WMA</MenuItem>
-              <MenuItem value={100}>100WMA</MenuItem>
-              <MenuItem value={200}>200WMA</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
       </Grid>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}

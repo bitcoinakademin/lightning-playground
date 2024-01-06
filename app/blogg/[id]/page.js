@@ -10,15 +10,17 @@ import {
 } from "@mui/material";
 import useSWR from "swr";
 import Markdown from "@/app/components/Markdown";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function BlogPost({ params }) {
+export default function BlogPost() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("id");
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(
-    `https://blog.bitcoinakademin.se/wp-json/wp/v2/posts/${params.id}`,
+    `https://blog.bitcoinakademin.se/wp-json/wp/v2/posts/${search}`,
     fetcher
   );
 

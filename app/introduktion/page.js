@@ -12,15 +12,41 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CaretUpIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import CustomTabPanel from "../components/CustomTabPanel";
 import useSWR from "swr";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export default function Introduction() {
+export default function introduktion() {
   const [value, setValue] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const searchParams = useSearchParams();
+  const search = searchParams.get("sektion");
+
+  useEffect(() => {
+    if (search === "start") {
+      setValue(0);
+    } else if (search === "uppfinningen-bitcoin") {
+      setValue(1);
+    } else if (search === "dagens-pengar-och-vagen-hit") {
+      setValue(2);
+    } else if (search === "ar-bitcoin-pengar") {
+      setValue(3);
+    } else if (search === "bitcoin-utover-pengar") {
+      setValue(4);
+    } else if (search === "statusen-for-bitcoin") {
+      setValue(5);
+    } else if (search === "hoten-mot-bitcoin") {
+      setValue(6);
+    } else if (search === "framtiden") {
+      setValue(7);
+    }else {
+      setValue(0);
+    }
+  }, [search]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -28,7 +54,7 @@ export default function Introduction() {
 
   const postIds = [10358, 10356, 10354, 10352, 10350, 10348, 10346, 10343];
   const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: introduction, error: introductionError } = useSWR(
+  const { data: introduktion, error: introduktionError } = useSWR(
     `https://blog.bitcoinakademin.se/wp-json/wp/v2/pages/${postIds[7]}`,
     fetcher
   );
@@ -62,7 +88,7 @@ export default function Introduction() {
   );
 
   if (
-    introductionError ||
+    introduktionError ||
     oneError ||
     twoError ||
     threeError ||
@@ -73,7 +99,7 @@ export default function Introduction() {
   )
     return <Typography>Kunde inte hämta datan. Försök igen senare</Typography>;
   if (
-    !introduction ||
+    !introduktion ||
     !one ||
     !two ||
     !three ||
@@ -89,9 +115,9 @@ export default function Introduction() {
   };
 
   return (
-    <Box spacing={2} sx={{ maxWidth: "md", overflow: isMobile && "hidden" }}>
+    <Box sx={{ maxWidth: "md", overflow: isMobile && "hidden" }}>
       <Typography variant="h3">Introduktion</Typography>
-      <Typography variant="body1" sx={{ mb: 3 }}>
+      <Typography variant="body1">
         Här hittar du en introduktion till Bitcoin. Om du är nybörjare till
         Bitcoin är detta ett utmärkt ställe att lära dig grunderna till vad
         Bitcoin är, varför det skapades och hur det fungerar.
@@ -102,18 +128,75 @@ export default function Introduction() {
         variant="scrollable"
         scrollButtons
         allowScrollButtonsMobile
+        sx={{ marginY: 6 }}
       >
-        <Tab label="Start" />
-        <Tab label="1. Uppfinningen Bitcoin" />
-        <Tab label="2. Dagens pengar och vägen hit" />
-        <Tab label="3. Är Bitcoin pengar?" />
-        <Tab label="4. Bitcoin utöver pengar" />
-        <Tab label="5. Statusen för Bitcoin" />
-        <Tab label="6. Hoten mot Bitcoin" />
-        <Tab label="7. Framtiden" />
+        <Tab
+          label="Start"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "start" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="1. Uppfinningen Bitcoin"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "uppfinningen-bitcoin" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="2. Dagens pengar och vägen hit"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "dagens-pengar-och-vagen-hit" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="3. Är Bitcoin pengar?"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "ar-bitcoin-pengar" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="4. Bitcoin utöver pengar"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "bitcoin-utover-pengar" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="5. Statusen för Bitcoin"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "statusen-for-bitcoin" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="6. Hoten mot Bitcoin"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "hoten-mot-bitcoin" },
+          }}
+          component={Link}
+        />
+        <Tab
+          label="7. Framtiden"
+          href={{
+            pathname: "/introduktion",
+            query: { sektion: "framtiden" },
+          }}
+          component={Link}
+        />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        <Markdown>{introduction.content.rendered}</Markdown>
+        <Markdown>{introduktion.content.rendered}</Markdown>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <Markdown>{one.content.rendered}</Markdown>

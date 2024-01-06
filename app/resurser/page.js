@@ -3,13 +3,10 @@
 import Markdown from "@/app/components/Markdown";
 import {
   Typography,
-  Grid,
-  Backdrop,
   CircularProgress,
   Stack,
 } from "@mui/material";
-import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useSWR from "swr";
 
 export default function Resources() {
