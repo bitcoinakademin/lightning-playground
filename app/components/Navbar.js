@@ -52,11 +52,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const Navbar = ({ children }) => {
+const Navbar = () => {
   const router = useRouter();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -72,9 +73,9 @@ const Navbar = ({ children }) => {
         position: "fixed",
         top: 0,
         width: "100%",
-        bgcolor: "white",
+        bgcolor: prefersDarkMode ? theme.palette.background : "white",
         borderBottom: 1,
-        borderBottomColor: "grey.300",
+        borderBottomColor: theme.palette.divider,
       }}
       open={open}
     >

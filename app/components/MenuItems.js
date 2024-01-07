@@ -23,7 +23,7 @@ import {
   PhotoIcon,
   AddressBookIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ function MenuItems() {
       setOpenSiffror(!openSiffror);
     } else if (clickedSection === "resources") {
       setOpenResources(!openResources);
-      router.push("/resurser")
+      router.push("/resurser");
     } else if (clickedSection === "sandbox") {
       setOpenSandbox(!openSandbox);
     }
@@ -60,7 +60,7 @@ function MenuItems() {
       <ListItem
         disablePadding
         sx={{
-          color: pathname === "/" ? theme.palette.primary.main : "black",
+          color: pathname === "/" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => router.push("/")}>
@@ -68,7 +68,7 @@ function MenuItems() {
             <HomeIcon
               style={{
                 width: "25px",
-                color: pathname === "/" ? theme.palette.primary.main : "black",
+                color: pathname === "/" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>
@@ -78,8 +78,7 @@ function MenuItems() {
       <ListItem
         disablePadding
         sx={{
-          color:
-            pathname === "/introduktion" ? theme.palette.primary.main : "black",
+          color: pathname === "/introduktion" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => handleOpen("introduction")}>
@@ -88,9 +87,7 @@ function MenuItems() {
               style={{
                 width: "25px",
                 color:
-                  pathname === "/introduktion"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/introduktion" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>
@@ -100,9 +97,7 @@ function MenuItems() {
               style={{
                 width: "15px",
                 color:
-                  pathname === "/introduktion"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/introduktion" && theme.palette.primary.main,
               }}
             />
           ) : (
@@ -110,9 +105,7 @@ function MenuItems() {
               style={{
                 width: "15px",
                 color:
-                  pathname === "/introduktion"
-                    ? theme.palette.primary.main
-                    : "black",
+                  pathname === "/introduktion" && theme.palette.primary.main,
               }}
             />
           )}
@@ -163,7 +156,9 @@ function MenuItems() {
           style={{
             textDecoration: "none",
             color:
-              search === "dagens-pengar-och-vagen-hit" ? theme.palette.primary.main : "gray",
+              search === "dagens-pengar-och-vagen-hit"
+                ? theme.palette.primary.main
+                : "gray",
           }}
         >
           <MenuItem>
@@ -214,7 +209,9 @@ function MenuItems() {
           style={{
             textDecoration: "none",
             color:
-              search === "statusen-for-bitcoin" ? theme.palette.primary.main : "gray",
+              search === "statusen-for-bitcoin"
+                ? theme.palette.primary.main
+                : "gray",
           }}
         >
           <MenuItem>
@@ -245,8 +242,7 @@ function MenuItems() {
           }}
           style={{
             textDecoration: "none",
-            color:
-              search === "framtiden" ? theme.palette.primary.main : "gray",
+            color: search === "framtiden" ? theme.palette.primary.main : "gray",
           }}
         >
           <MenuItem>
@@ -257,7 +253,7 @@ function MenuItems() {
       <ListItem
         disablePadding
         sx={{
-          color: pathname === "/siffror" ? theme.palette.primary.main : "black",
+          color: pathname === "/siffror" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => handleOpen("siffror")}>
@@ -265,10 +261,7 @@ function MenuItems() {
             <GraphIcon
               style={{
                 width: "25px",
-                color:
-                  pathname === "/siffror"
-                    ? theme.palette.primary.main
-                    : "black",
+                color: pathname === "/siffror" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>
@@ -277,20 +270,14 @@ function MenuItems() {
             <CaretUpIcon
               style={{
                 width: "15px",
-                color:
-                  pathname === "/siffror"
-                    ? theme.palette.primary.main
-                    : "black",
+                color: pathname === "/siffror" && theme.palette.primary.main,
               }}
             />
           ) : (
             <CaretDownIcon
               style={{
                 width: "15px",
-                color:
-                  pathname === "/siffror"
-                    ? theme.palette.primary.main
-                    : "black",
+                color: pathname === "/siffror" && theme.palette.primary.main,
               }}
             />
           )}
@@ -376,7 +363,10 @@ function MenuItems() {
           }}
           style={{
             textDecoration: "none",
-            color: search === "kallor-och-bilagor" ? theme.palette.primary.main : "gray",
+            color:
+              search === "kallor-och-bilagor"
+                ? theme.palette.primary.main
+                : "gray",
           }}
         >
           <MenuItem>
@@ -388,7 +378,7 @@ function MenuItems() {
         disablePadding
         onClick={() => router.push("/blogg")}
         sx={{
-          color: pathname === "/blogg" ? theme.palette.primary.main : "black",
+          color: pathname === "/blogg" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => router.push("/blogg")}>
@@ -396,8 +386,7 @@ function MenuItems() {
             <PhotoIcon
               style={{
                 width: "25px",
-                color:
-                  pathname === "/blogg" ? theme.palette.primary.main : "black",
+                color: pathname === "/blogg" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>
@@ -408,72 +397,26 @@ function MenuItems() {
         disablePadding
         onClick={() => router.push("/graf")}
         sx={{
-          color: pathname === "/graf" ? theme.palette.primary.main : "black",
+          color: pathname === "/graf" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => router.push("/graf")}>
           <ListItemIcon>
-            <TimelineOutlinedIcon               style={{
+            <TimelineOutlinedIcon
+              style={{
                 width: "25px",
-                color:
-                  pathname === "/graf" ? theme.palette.primary.main : "black",
-              }}/>
+                color: pathname === "/graf" && theme.palette.primary.main,
+              }}
+            />
           </ListItemIcon>
           <ListItemText>Graf</ListItemText>
         </ListItemButton>
       </ListItem>
-      {/* <ListItem
-        disablePadding
-        sx={{
-          color: pathname === "/webln" ? theme.palette.primary.main : "black",
-        }}
-      >
-        <ListItemButton onClick={() => handleOpen("sandbox")}>
-        <ListItemIcon>
-          <BlockIcon
-            style={{
-              width: "25",
-              color:
-                pathname === "/webln" ? theme.palette.primary.main : "black",
-            }}
-          />
-        </ListItemIcon>
-        <ListItemText>Sandlåda</ListItemText>
-        {openSandbox ? (
-          <CaretUpIcon
-            style={{
-              width: "15",
-              color:
-                pathname === "/webln" ? theme.palette.primary.main : "black",
-            }}
-          />
-        ) : (
-          <CaretDownIcon
-          style={{
-            width: "15",
-            color:
-              pathname === "/webln" ? theme.palette.primary.main : "black",
-          }}
-        />
-        )}
-        </ListItemButton>
-      </ListItem>
-      <Collapse in={openSandbox} timeout="auto" unmountOnExit sx={{ ml: 4.5 }}>
-        <MenuItem
-          onClick={() => router.push("/webln")}
-          sx={{
-            color: pathname === "/webln" ? theme.palette.primary.main : "black",
-          }}
-        >
-          <ListItemText>Lightning webbplånbok</ListItemText>
-        </MenuItem>
-      </Collapse> */}
-       <ListItem
+      <ListItem
         disablePadding
         onClick={() => handleOpen("resources")}
         sx={{
-          color:
-            pathname === "/resurser" ? theme.palette.primary.main : "black",
+          color: pathname === "/resurser" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => handleOpen("resources")}>
@@ -481,79 +424,17 @@ function MenuItems() {
             <StarIcon
               style={{
                 width: "25px",
-                color:
-                  pathname === "/resurser"
-                    ? theme.palette.primary.main
-                    : "black",
+                color: pathname === "/resurser" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>
           <ListItemText>Resurser</ListItemText>
-          {/* {openResources ? (
-            <CaretUpIcon
-              style={{
-                width: "15px",
-                color:
-                  pathname === "/resources"
-                    ? theme.palette.primary.main
-                    : "black",
-              }}
-            />
-          ) : (
-            <CaretDownIcon
-              style={{
-                width: "15px",
-                color:
-                  pathname === "/resources"
-                    ? theme.palette.primary.main
-                    : "black",
-              }}
-            />
-          )} */}
         </ListItemButton>
       </ListItem>
-      {/* <Collapse
-        in={openResources}
-        timeout="auto"
-        unmountOnExit
-        sx={{ ml: 4.5 }}
-      >
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          sx={{
-            color:
-              pathname === "/resources" ? theme.palette.primary.main : "black",
-          }}
-        >
-          <ListItemText>Kom igång med Bitcoin</ListItemText>
-        </MenuItem>
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          // sx={{
-          //   color:
-          //     pathname === "/introduktion"
-          //       ? theme.palette.primary.main
-          //       : "black",
-          // }}
-        >
-          <ListItemText>Eurodollar</ListItemText>
-        </MenuItem>
-        <MenuItem
-          onClick={() => router.push("/resources")}
-          // sx={{
-          //   color:
-          //     pathname === "/introduktion"
-          //       ? theme.palette.primary.main
-          //       : "black",
-          // }}
-        >
-          <ListItemText>Pengar</ListItemText>
-        </MenuItem>
-      </Collapse> */}
       <ListItem
         disablePadding
         sx={{
-          color: pathname === "/kontakt" ? theme.palette.primary.main : "black",
+          color: pathname === "/kontakt" && theme.palette.primary.main,
         }}
       >
         <ListItemButton onClick={() => router.push("/kontakt")}>
@@ -561,10 +442,7 @@ function MenuItems() {
             <AddressBookIcon
               style={{
                 width: "25px",
-                color:
-                  pathname === "/kontakt"
-                    ? theme.palette.primary.main
-                    : "black",
+                color: pathname === "/kontakt" && theme.palette.primary.main,
               }}
             />
           </ListItemIcon>

@@ -36,7 +36,7 @@ export default function Home() {
           item
           xs={12}
           md={6}
-          height={isMobile ? "60vh" : "75vh"}
+          height={isMobile ? "60vh" : "60vh"}
           maxHeight={700}
           minHeight={500}
         >
@@ -44,7 +44,7 @@ export default function Home() {
             height="100%"
             width="80%"
             display="flex"
-            justifyContent="center"
+            justifyContent={isMobile ? "start" : "center"}
             alignItems="start"
             flexDirection="column"
           >
@@ -56,8 +56,8 @@ export default function Home() {
               vägen att bli viktigare än internet, mycket viktigare.
             </Typography>
             <Stack direction={"row"} spacing={3}>
-              <Link href="/#latest-news">
-                <Button variant="contained" sx={{ color: "white" }}>
+              <Link href="/#nyheter">
+                <Button variant="contained" sx={{ color: "white", fontWeight: "bold" }}>
                   Senaste nytt
                 </Button>
               </Link>
@@ -90,7 +90,7 @@ export default function Home() {
           </Box>
         </Grid>
       </Grid>
-      <Stack spacing={isMobile ? 5 : 15}>
+      <Stack spacing={isMobile ? 5 : 15} sx={{mt: isMobile ? 5 : 10}}>
         <ContentSection />
         <News />
       </Stack>

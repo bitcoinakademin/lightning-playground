@@ -1,8 +1,9 @@
 "use client"
 
-import { Grid, Link, AppBar, Toolbar, Typography, Box } from "@mui/material";
+import { Grid, Link, AppBar, Toolbar, Typography, useTheme, } from "@mui/material";
 
 const Footer = () => {
+  const theme = useTheme();
   return (
     <AppBar
       elevation={0}
@@ -12,7 +13,7 @@ const Footer = () => {
         zIndex: 100,
         width: "100%",
         height: 100,
-        bgcolor: "grey.100",
+        bgcolor: theme.palette.action.hover,
       }}
     >
       <Grid container display="flex" height={"100%"}>
@@ -26,9 +27,9 @@ const Footer = () => {
           justifyContent="center"
           height={"100%"}
         >
-          <Link href="https://bitcoinakademin.se/">BitcoinAkademin</Link>
-          <Typography variant="caption" sx={{ color: "#ffc93c" }}>
-            @2023
+          <Link href="/">BitcoinAkademin</Link>
+          <Typography variant="caption" sx={{ color: theme.palette.primary.main }}>
+            @2024
           </Typography>
         </Grid>
       </Grid>
