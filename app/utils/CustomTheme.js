@@ -11,7 +11,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Box } from "@mui/material";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 function CustomTheme({ children }) {
@@ -69,7 +69,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
  //const db = getFirestore(app);
 
 export const db = getFirestore(app);
