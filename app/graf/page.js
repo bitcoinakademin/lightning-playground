@@ -12,6 +12,8 @@ import {
   InputLabel,
   Button,
   useMediaQuery,
+  Box,
+  Stack,
 } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -66,8 +68,8 @@ function InteractiveGraph() {
 
           //TODO fix regression
           setBitcoinRegression(regression.linear(res.data.prices));
-          setChartCoin(coin)
-          setChartCurrency(currency)
+          setChartCoin(coin);
+          setChartCurrency(currency);
           setLoading(false);
         })
         .catch((err) => {
@@ -84,48 +86,43 @@ function InteractiveGraph() {
   };
 
   return (
-    <Grid container id="interactiveGraph" spacing={2} sx={{ maxWidth: "md" }}>
-      <Grid item xs={12} md={12}>
-        <Typography variant="h3">
-          Graf
-        </Typography>
-        <Typography sx={{ mb: 1 }}>
-          Här kan du se prisutvecklingen av Bitcoin och andra cryptovalutor över
-          en valfri period.
-        </Typography>
-        </Grid>
-        <Grid item xs={4} md={3}>
-          <FormControl sx={{ width: isMobile ? 100 : 200 }}>
-            <InputLabel>Cryptovaluta</InputLabel>
-            <Select
-              value={coin}
-              label="Cryptovaluta"
-              onChange={(event) => setCoin(event.target.value)}
-              size="small"
-            >
-              <MenuItem value={"bitcoin"}>Bitcoin</MenuItem>
-              <MenuItem value={"ethereum"}>Ethereum</MenuItem>
-              <MenuItem value={"solana"}>Solana</MenuItem>
-              <MenuItem value={"cardano"}>Cardano</MenuItem>
-              <MenuItem value={"dogecoin"}>Dogecoin</MenuItem>
-            </Select>
-          </FormControl>
-          </Grid>
-          <Grid item xs={8} md={9}>
-          <FormControl sx={{ width: 200 }}>
-            <InputLabel>Valuta</InputLabel>
-            <Select
-              value={currency}
-              label="Valuta"
-              onChange={(event) => setCurrency(event.target.value)}
-              size="small"
-            >
-              <MenuItem value={"sek"}>Svenska Kronor</MenuItem>
-              <MenuItem value={"usd"}>Amerikanska Dollar</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        {/* <Grid item xs={4} md={3}>
+    <Box sx={{ maxWidth: isMobile ? "90vw" : "md" }}>
+      <Typography variant="h3">Graf</Typography>
+      <Typography sx={{ mb: 1 }}>
+        Här kan du se prisutvecklingen av Bitcoin och andra cryptovalutor över
+        en valfri period.
+      </Typography>
+
+      <Stack direction={"row"} spacing={2} sx={{mt: 4}}>
+        <FormControl sx={{ width: isMobile ? 100 : 200 }}>
+          <InputLabel>Cryptovaluta</InputLabel>
+          <Select
+            value={coin}
+            label="Cryptovaluta"
+            onChange={(event) => setCoin(event.target.value)}
+            size="small"
+          >
+            <MenuItem value={"bitcoin"}>Bitcoin</MenuItem>
+            <MenuItem value={"ethereum"}>Ethereum</MenuItem>
+            <MenuItem value={"solana"}>Solana</MenuItem>
+            <MenuItem value={"cardano"}>Cardano</MenuItem>
+            <MenuItem value={"dogecoin"}>Dogecoin</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: 200 }}>
+          <InputLabel>Valuta</InputLabel>
+          <Select
+            value={currency}
+            label="Valuta"
+            onChange={(event) => setCurrency(event.target.value)}
+            size="small"
+          >
+            <MenuItem value={"sek"}>Svenska Kronor</MenuItem>
+            <MenuItem value={"usd"}>Amerikanska Dollar</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+      {/* <Grid item xs={4} md={3}>
           <FormControl sx={{ width: isMobile ? 100 : 200 }}>
             <InputLabel>Skala</InputLabel>
             <Select
@@ -156,88 +153,85 @@ function InteractiveGraph() {
             </Select>
           </FormControl>
         </Grid> */}
-        <Grid item xs={6} md={3}>
-          <DatePicker
-            label="Från"
-            value={startDate}
-            onChange={(newValue) => setStartDate(newValue)}
-            slotProps={{ textField: { size: 'small' } }}
-            sx={{ width: isMobile ? 150 : 200 }}
-          />
-          </Grid>
-          <Grid item xs={6} md={9}>
-          <DatePicker
-            label="Till"
-            value={endDate}
-            onChange={(newValue) => setEndDate(newValue)}
-            slotProps={{ textField: { size: 'small' } }}
-            sx={{ width: isMobile ? 150 : 200 }}
-          />
-          </Grid>
-          <Grid item xs={6} md={3}>
-          <Button
-            variant="contained"
-            sx={{
-              color: "white",
-              fontWeight: "bold",
-              textTransform: "none",
-            }}
-            onClick={fetchBitcoinData}
-          >
-            Uppdatera
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={12}>
-        <LineChart
-          xAxis={[
-            {
-              data: bitcoinData[0],
-              scaleType: "time",
-            },
-          ]}
-          yAxis={[
-            {
-              scaleType: scaleType,
-            },
-          ]}
-          series={
-            trend !== 0
-              ? [
-                  {
-                    label: `${chartCoin}-pris (${chartCurrency})`,
-                    data: bitcoinData[1],
-                    color: theme.palette.primary.main,
-                    showMark: false,
-                  },
-
-                  {
-                    label: `${trend} veckors genomsnitt`,
-                    data: bitcoinMA,
-                    color: "grey",
-                    showMark: false,
-                  },
-                ]
-              : [
-                  {
-                    label: `${chartCoin}-pris (${chartCurrency})`,
-                    data: bitcoinData[1],
-                    color: theme.palette.primary.main,
-                    showMark: false,
-                  },
-                ]
-          }
-          width={isMobile ? 375 : 900}
-          height={isMobile ? 300 : 400}
-          sx={{ padding: 1 }}
+      <Stack direction={"row"} spacing={2} sx={{marginY: 4}}>
+        <DatePicker
+          label="Från"
+          value={startDate}
+          onChange={(newValue) => setStartDate(newValue)}
+          slotProps={{ textField: { size: "small" } }}
+          sx={{ width: isMobile ? 150 : 200 }}
         />
-      </Grid>
+
+        <DatePicker
+          label="Till"
+          value={endDate}
+          onChange={(newValue) => setEndDate(newValue)}
+          slotProps={{ textField: { size: "small" } }}
+          sx={{ width: isMobile ? 150 : 200 }}
+        />
+      </Stack>
+      <Button
+        variant="contained"
+        sx={{
+          color: "white",
+          fontWeight: "bold",
+          textTransform: "none",
+        }}
+        onClick={fetchBitcoinData}
+      >
+        Uppdatera
+      </Button>
+
+      <LineChart
+        xAxis={[
+          {
+            data: bitcoinData[0],
+            scaleType: "time",
+          },
+        ]}
+        yAxis={[
+          {
+            scaleType: scaleType,
+          },
+        ]}
+        series={
+          trend !== 0
+            ? [
+                {
+                  label: `${chartCoin}-pris (${chartCurrency})`,
+                  data: bitcoinData[1],
+                  color: theme.palette.primary.main,
+                  showMark: false,
+                },
+
+                {
+                  label: `${trend} veckors genomsnitt`,
+                  data: bitcoinMA,
+                  color: "grey",
+                  showMark: false,
+                },
+              ]
+            : [
+                {
+                  label: `${chartCoin}-pris (${chartCurrency})`,
+                  data: bitcoinData[1],
+                  color: theme.palette.primary.main,
+                  showMark: false,
+                },
+              ]
+        }
+        width={isMobile ? 375 : 900}
+        height={isMobile ? 300 : 400}
+        sx={{ padding: 1 }}
+      />
+
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
       >
         <CircularProgress />
       </Backdrop>
-    </Grid>
+    </Box>
   );
 }
 

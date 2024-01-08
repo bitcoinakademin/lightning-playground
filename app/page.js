@@ -31,18 +31,18 @@ export default function Home() {
 
   return (
     <Box>
-      <Grid container spacing={2} maxWidth={"lg"} display={"flex"}>
+      <Grid container maxWidth={"md"} display={"flex"}>
         <Grid
           item
           xs={12}
-          md={6}
+          md={7}
           height={isMobile ? "60vh" : "60vh"}
           maxHeight={700}
           minHeight={500}
         >
           <Box
             height="100%"
-            width="80%"
+            width="100%"
             display="flex"
             justifyContent={isMobile ? "start" : "center"}
             alignItems="start"
@@ -67,12 +67,12 @@ export default function Home() {
                   query: { sektion: "start" },
                 }}
               >
-                <Button variant="outlined">Kom igång med Bitcoin</Button>
+                <Button variant="outlined" sx={{fontWeight: "bold"}}>Vad är Bitcoin?</Button>
               </Link>
             </Stack>
           </Box>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={5}>
           <Box
             height="100%"
             display="flex"

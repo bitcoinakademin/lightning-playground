@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 export default function News() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isLightTheme = useTheme().palette.mode == "light";
   const [news, setNews] = useState([
     {
       title: "",
@@ -30,7 +31,7 @@ export default function News() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "news"), orderBy("date", "desc"))
+    const q = query(collection(db, "news"), orderBy("date", "desc"));
     const fetchNews = async () => {
       await getDocs(q).then((querySnapshot) => {
         const newData = querySnapshot.docs.map((doc) => ({
@@ -44,7 +45,6 @@ export default function News() {
     fetchNews();
   }, []);
 
-
   return (
     <Box
       display="flex"
@@ -55,7 +55,7 @@ export default function News() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <Box>
+        <Box maxWidth="md">
           <Typography variant="h4" id="nyheter" sx={{ scrollMargin: 70 }}>
             Nyheter
           </Typography>
@@ -66,11 +66,17 @@ export default function News() {
           {news.map((post) => (
             <Card
               key={post.id}
-              sx={{ mb: 2, width: isMobile ? "90vw" : 800, borderRadius: 4 }}
+              elevation={4}
+              sx={{
+                mb: 2,
+                width: isMobile ? "90vw" : 800,
+                borderRadius: 4,
+                bgcolor: isLightTheme && theme.palette.action.hover,
+              }}
             >
               <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                 {dayjs.unix(post.date.seconds).format('YYYY-MM-DD')}
+                  {dayjs.unix(post.date.seconds).format("YYYY-MM-DD")}
                 </Typography>
                 <Typography
                   variant="h5"

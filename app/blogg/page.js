@@ -22,6 +22,7 @@ export default function Blog() {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(28);
   const theme = useTheme();
+  const isLightTheme = useTheme().palette.mode == "light";
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleChange = (event, value) => {
@@ -67,7 +68,9 @@ export default function Blog() {
           color="white"
           passHref
         >
-          <Card sx={{ mb: 2, width: isMobile ? "90vw" : 800, borderRadius: 4 }}>
+          <Card 
+          elevation={4}
+          sx={{ mb: 2, width: isMobile ? "90vw" : 800, borderRadius: 4, bgcolor: isLightTheme && theme.palette.action.hover, }}>
             <CardActionArea>
               <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary">

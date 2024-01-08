@@ -20,14 +20,11 @@ function CustomTheme({ children }) {
     palette: {
       mode: prefersDarkMode ? "dark" : "light",
       primary: {
-        main: "#ffc93c",
+        main: "#F7931A",
       },
       secondary: {
-        main: "#ffd76f",
+        main: "#4D4D4D",
       },
-    },
-    typography: {
-      fontFamily: "Figtree",
     },
   });
 

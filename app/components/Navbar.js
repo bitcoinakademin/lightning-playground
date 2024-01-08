@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import BitcoinPrice from "./Price/BitcoinPrice";
 import BlockHeight from "./Price/BlockHeight";
 import FeeEstimates from "./Price/FeeEstimates";
+import { grey } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -55,9 +56,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const Navbar = () => {
   const router = useRouter();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [open, setOpen] = isMobile ? useState(false) : useState(true);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -68,12 +69,12 @@ const Navbar = () => {
 
   return (
     <AppBar
-    elevation={0} 
+      elevation={0}
       sx={{
         position: "fixed",
         top: 0,
         width: "100%",
-        bgcolor: prefersDarkMode ? theme.palette.background : "white",
+        bgcolor: prefersDarkMode ? theme.palette.background : grey[100],
         borderBottom: 1,
         borderBottomColor: theme.palette.divider,
       }}
@@ -88,7 +89,9 @@ const Navbar = () => {
               edge="start"
               sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
-              <MenuIcon style={{ width: 30, color: theme.palette.primary.main }} />
+              <MenuIcon
+                style={{ width: 30, color: theme.palette.primary.main }}
+              />
             </IconButton>
           </Grid>
           <Grid
@@ -111,13 +114,31 @@ const Navbar = () => {
             <></>
           ) : (
             <>
-              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+              <Grid
+                item
+                md={1.5}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 <BitcoinPrice />
               </Grid>
-              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+              <Grid
+                item
+                md={1.5}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 <BlockHeight />
               </Grid>
-              <Grid item md={1.5} display="flex" alignItems="center" justifyContent="center">
+              <Grid
+                item
+                md={1.5}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 <FeeEstimates />
               </Grid>
             </>
@@ -131,9 +152,11 @@ const Navbar = () => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            bgcolor: !prefersDarkMode && grey[100]
           },
+          
         }}
-        variant={isMobile ? "temporary" : "persistent"}
+        variant={isMobile ? "temporary" : "permanent"}
         anchor="left"
         open={open}
         onClose={handleDrawerClose}
@@ -142,18 +165,20 @@ const Navbar = () => {
           <BitcoinCircleIcon
             style={{
               height: 50,
-              marginRight: 150,
+              marginRight: 175,
               color: theme.palette.primary.main,
             }}
           />
-          <IconButton onClick={handleDrawerClose}>
-            <CaretLeftIcon
-              style={{
-                width: "20px",
-                color: theme.palette.primary.main,
-              }}
-            />
-          </IconButton>
+          {isMobile && (
+            <IconButton onClick={handleDrawerClose}>
+              <CaretLeftIcon
+                style={{
+                  width: "20px",
+                  color: theme.palette.primary.main,
+                }}
+              />
+            </IconButton>
+          )}
         </DrawerHeader>
         <Divider />
         {/* <Toolbar > */}
